@@ -1,0 +1,8 @@
+idCliente;int;a
+nomeCliente;String;a
+enderecoCliente;String;a
+cpfCliente;String;a
+telefoneCliente;String;a
+celularCliente;String;a
+emailCliente;String;a
+senhaCliente;String;a
