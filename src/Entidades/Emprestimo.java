@@ -6,7 +6,8 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -14,9 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -32,17 +32,12 @@ public class Emprestimo implements Serializable {
     @EmbeddedId
     protected EmprestimoPK emprestimoPK;
     @Column(name = "data_retirada")
-    @Temporal(TemporalType.DATE)
-    private Date dataRetirada;
-    @Column(name = "data_devolucao")
-    @Temporal(TemporalType.DATE)
-    private Date dataDevolucao;
+    private String dataRetirada;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Cliente cliente;
-    @JoinColumn(name = "id_livro", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Livro livro;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "emprestimo")
+    private List<ItensEmprestimo> itensEmprestimoList;
 
     public Emprestimo() {
     }
@@ -51,8 +46,8 @@ public class Emprestimo implements Serializable {
         this.emprestimoPK = emprestimoPK;
     }
 
-    public Emprestimo(int idCliente, int idLivro) {
-        this.emprestimoPK = new EmprestimoPK(idCliente, idLivro);
+    public Emprestimo(int idEmprestimo, int idCliente) {
+        this.emprestimoPK = new EmprestimoPK(idEmprestimo, idCliente);
     }
 
     public EmprestimoPK getEmprestimoPK() {
@@ -63,20 +58,12 @@ public class Emprestimo implements Serializable {
         this.emprestimoPK = emprestimoPK;
     }
 
-    public Date getDataRetirada() {
+    public String getDataRetirada() {
         return dataRetirada;
     }
 
-    public void setDataRetirada(Date dataRetirada) {
+    public void setDataRetirada(String dataRetirada) {
         this.dataRetirada = dataRetirada;
-    }
-
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
     }
 
     public Cliente getCliente() {
@@ -87,12 +74,12 @@ public class Emprestimo implements Serializable {
         this.cliente = cliente;
     }
 
-    public Livro getLivro() {
-        return livro;
+    public List<ItensEmprestimo> getItensEmprestimoList() {
+        return itensEmprestimoList;
     }
 
-    public void setLivro(Livro livro) {
-        this.livro = livro;
+    public void setItensEmprestimoList(List<ItensEmprestimo> itensEmprestimoList) {
+        this.itensEmprestimoList = itensEmprestimoList;
     }
 
     @Override

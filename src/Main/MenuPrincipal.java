@@ -87,13 +87,13 @@ public class MenuPrincipal extends JFrame {
             System.out.println("erro ao carregar a imagem");
         }
 
-        cadLivro.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LivroGUI livroGUI = new LivroGUI(p, dimensao);
-            }
-        });
+//        cadLivro.addActionListener(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                LivroGUI livroGUI = new LivroGUI(p, dimensao);
+//            }
+//        });
         cadEditora.addActionListener(new ActionListener() {
 
             @Override

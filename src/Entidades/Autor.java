@@ -6,6 +6,7 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -34,6 +37,9 @@ public class Autor implements Serializable {
     private Integer idAutor;
     @Column(name = "nome_autor")
     private String nomeAutor;
+    @Column(name = "data_nascimento")
+    @Temporal(TemporalType.DATE)
+    private Date dataNascimento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "autorIdAutor")
     private List<Livro> livroList;
 
@@ -58,6 +64,14 @@ public class Autor implements Serializable {
 
     public void setNomeAutor(String nomeAutor) {
         this.nomeAutor = nomeAutor;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public List<Livro> getLivroList() {

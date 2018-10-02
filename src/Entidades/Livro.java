@@ -7,7 +7,9 @@ package Entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,10 +41,6 @@ public class Livro implements Serializable {
     private String nome;
     @Column(name = "edicao")
     private String edicao;
-    @Column(name = "editora")
-    private String editora;
-    @Column(name = "autor")
-    private String autor;
     @Column(name = "ano_publicacao")
     @Temporal(TemporalType.DATE)
     private Date anoPublicacao;
@@ -59,6 +58,8 @@ public class Livro implements Serializable {
     @JoinColumn(name = "status_id_status", referencedColumnName = "id_status")
     @ManyToOne(optional = false)
     private Status statusIdStatus;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro")
+    private List<ItensEmprestimo> itensEmprestimoList;
 
     public Livro() {
     }
@@ -89,22 +90,6 @@ public class Livro implements Serializable {
 
     public void setEdicao(String edicao) {
         this.edicao = edicao;
-    }
-
-    public String getEditora() {
-        return editora;
-    }
-
-    public void setEditora(String editora) {
-        this.editora = editora;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
     }
 
     public Date getAnoPublicacao() {
@@ -153,6 +138,14 @@ public class Livro implements Serializable {
 
     public void setStatusIdStatus(Status statusIdStatus) {
         this.statusIdStatus = statusIdStatus;
+    }
+
+    public List<ItensEmprestimo> getItensEmprestimoList() {
+        return itensEmprestimoList;
+    }
+
+    public void setItensEmprestimoList(List<ItensEmprestimo> itensEmprestimoList) {
+        this.itensEmprestimoList = itensEmprestimoList;
     }
 
     @Override
