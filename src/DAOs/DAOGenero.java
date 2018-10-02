@@ -1,17 +1,17 @@
 package DAOs;
 
-import Entidades.ModuloSistema;
+import Entidades.Genero;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOGenero extends DAOGenerico<ModuloSistema> {
+public class DAOGenero extends DAOGenerico<Genero> {
 
     public DAOGenero() {
-        super(ModuloSistema.class);
+        super(Genero.class);
     }
 
-    public int autoIdModuloSistema() {
-        Integer a = (Integer) em.createQuery("SELECT MAX(e.idModuloSistema) FROM ModuloSistema e ").getSingleResult();
+    public int autoIdGenero() {
+        Integer a = (Integer) em.createQuery("SELECT MAX(e.idGenero) FROM Genero e ").getSingleResult();
         if (a != null) {
             return a + 1;
         } else {
@@ -19,24 +19,24 @@ public class DAOGenero extends DAOGenerico<ModuloSistema> {
         }
     }
 
-    public List<ModuloSistema> listByNome(String nome) {
-        return em.createQuery("SELECT e FROM ModuloSistema e WHERE e.nomeModuloSistema LIKE :nome").setParameter("nome", "%" + nome + "%").getResultList();
+    public List<Genero> listByNome(String nome) {
+        return em.createQuery("SELECT e FROM Genero e WHERE e.nomeGenero LIKE :nome").setParameter("nome", "%" + nome + "%").getResultList();
     }
 
-    public List<ModuloSistema> listById(int id) {
-        return em.createQuery("SELECT e FROM ModuloSistema e WHERE e.idModuloSistema = :id").setParameter("id", id).getResultList();
+    public List<Genero> listById(int id) {
+        return em.createQuery("SELECT e FROM Genero e WHERE e.idGenero = :id").setParameter("id", id).getResultList();
     }
 
-    public List<ModuloSistema> listInOrderNome() {
-        return em.createQuery("SELECT e FROM ModuloSistema e ORDER BY e.nomeModuloSistema").getResultList();
+    public List<Genero> listInOrderNome() {
+        return em.createQuery("SELECT e FROM Genero e ORDER BY e.nomeGenero").getResultList();
     }
 
-    public List<ModuloSistema> listInOrderId() {
-        return em.createQuery("SELECT e FROM ModuloSistema e ORDER BY e.idModuloSistema").getResultList();
+    public List<Genero> listInOrderId() {
+        return em.createQuery("SELECT e FROM Genero e ORDER BY e.idGenero").getResultList();
     }
 
     public List<String> listInOrderNomeStrings(String qualOrdem) {
-        List<ModuloSistema> lf;
+        List<Genero> lf;
         if (qualOrdem.equals("id")) {
             lf = listInOrderId();
         } else {
@@ -45,7 +45,7 @@ public class DAOGenero extends DAOGenerico<ModuloSistema> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getIdModuloSistema() + "-" + lf.get(i).getNomeModuloSistema());
+            ls.add(lf.get(i).getIdGenero() + "-" + lf.get(i).getNomeGenero());
         }
         return ls;
     }

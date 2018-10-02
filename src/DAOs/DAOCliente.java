@@ -45,7 +45,7 @@ public class DAOCliente extends DAOGenerico<Cliente> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getIdCliente() + "-" + lf.get(i).getNomeCliente());
+            ls.add(lf.get(i).getId()+ "-" + lf.get(i).getNome());
         }
         return ls;
     }
