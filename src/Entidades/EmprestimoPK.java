@@ -18,7 +18,7 @@ import javax.persistence.Embeddable;
 public class EmprestimoPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "idEmprestimo")
+    @Column(name = "id_emprestimo")
     private int idEmprestimo;
     @Basic(optional = false)
     @Column(name = "id_cliente")

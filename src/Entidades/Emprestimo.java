@@ -31,9 +31,9 @@ public class Emprestimo implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected EmprestimoPK emprestimoPK;
-    @Column(name = "dataRetirada")
-    private String dataRetirada;
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id", insertable = false, updatable = false)
+    @Column(name = "data_emprestimo")
+    private String dataEmprestimo;
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Cliente cliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "emprestimo")
@@ -58,12 +58,12 @@ public class Emprestimo implements Serializable {
         this.emprestimoPK = emprestimoPK;
     }
 
-    public String getDataRetirada() {
-        return dataRetirada;
+    public String getDataEmprestimo() {
+        return dataEmprestimo;
     }
 
-    public void setDataRetirada(String dataRetirada) {
-        this.dataRetirada = dataRetirada;
+    public void setDataEmprestimo(String dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
     }
 
     public Cliente getCliente() {

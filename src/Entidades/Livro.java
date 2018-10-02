@@ -35,15 +35,15 @@ public class Livro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Column(name = "nome")
-    private String nome;
-    @Column(name = "edicao")
-    private String edicao;
-    @Column(name = "ano_publicacao")
+    @Column(name = "id_livro")
+    private Integer idLivro;
+    @Column(name = "nome_livro")
+    private String nomeLivro;
+    @Column(name = "edicao_livro")
+    private String edicaoLivro;
+    @Column(name = "ano_publicacao_livro")
     @Temporal(TemporalType.DATE)
-    private Date anoPublicacao;
+    private Date anoPublicacaoLivro;
     @Column(name = "qnt_estoque")
     private Integer qntEstoque;
     @JoinColumn(name = "autor_id_autor", referencedColumnName = "id_autor")
@@ -64,40 +64,40 @@ public class Livro implements Serializable {
     public Livro() {
     }
 
-    public Livro(Integer id) {
-        this.id = id;
+    public Livro(Integer idLivro) {
+        this.idLivro = idLivro;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdLivro() {
+        return idLivro;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdLivro(Integer idLivro) {
+        this.idLivro = idLivro;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeLivro() {
+        return nomeLivro;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeLivro(String nomeLivro) {
+        this.nomeLivro = nomeLivro;
     }
 
-    public String getEdicao() {
-        return edicao;
+    public String getEdicaoLivro() {
+        return edicaoLivro;
     }
 
-    public void setEdicao(String edicao) {
-        this.edicao = edicao;
+    public void setEdicaoLivro(String edicaoLivro) {
+        this.edicaoLivro = edicaoLivro;
     }
 
-    public Date getAnoPublicacao() {
-        return anoPublicacao;
+    public Date getAnoPublicacaoLivro() {
+        return anoPublicacaoLivro;
     }
 
-    public void setAnoPublicacao(Date anoPublicacao) {
-        this.anoPublicacao = anoPublicacao;
+    public void setAnoPublicacaoLivro(Date anoPublicacaoLivro) {
+        this.anoPublicacaoLivro = anoPublicacaoLivro;
     }
 
     public Integer getQntEstoque() {
@@ -151,7 +151,7 @@ public class Livro implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idLivro != null ? idLivro.hashCode() : 0);
         return hash;
     }
 
@@ -162,7 +162,7 @@ public class Livro implements Serializable {
             return false;
         }
         Livro other = (Livro) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idLivro == null && other.idLivro != null) || (this.idLivro != null && !this.idLivro.equals(other.idLivro))) {
             return false;
         }
         return true;
@@ -170,7 +170,7 @@ public class Livro implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Livro[ id=" + id + " ]";
+        return "Entidades.Livro[ idLivro=" + idLivro + " ]";
     }
     
 }

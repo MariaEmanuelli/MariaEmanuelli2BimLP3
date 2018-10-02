@@ -21,7 +21,7 @@ public class ItensEmprestimoPK implements Serializable {
     @Column(name = "id_livro")
     private int idLivro;
     @Basic(optional = false)
-    @Column(name = "idEmprestimo")
+    @Column(name = "id_emprestimo")
     private int idEmprestimo;
 
     public ItensEmprestimoPK() {

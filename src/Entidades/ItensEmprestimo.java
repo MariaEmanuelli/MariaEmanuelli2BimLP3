@@ -31,13 +31,13 @@ public class ItensEmprestimo implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ItensEmprestimoPK itensEmprestimoPK;
-    @Column(name = "data_devolucao")
+    @Column(name = "data_emprestimo")
     @Temporal(TemporalType.DATE)
-    private Date dataDevolucao;
-    @JoinColumn(name = "id_livro", referencedColumnName = "id", insertable = false, updatable = false)
+    private Date dataEmprestimo;
+    @JoinColumn(name = "id_livro", referencedColumnName = "id_livro", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Livro livro;
-    @JoinColumn(name = "idEmprestimo", referencedColumnName = "idEmprestimo", insertable = false, updatable = false)
+    @JoinColumn(name = "id_emprestimo", referencedColumnName = "id_emprestimo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Emprestimo emprestimo;
 
@@ -60,12 +60,12 @@ public class ItensEmprestimo implements Serializable {
         this.itensEmprestimoPK = itensEmprestimoPK;
     }
 
-    public Date getDataDevolucao() {
-        return dataDevolucao;
+    public Date getDataEmprestimo() {
+        return dataEmprestimo;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
+    public void setDataEmprestimo(Date dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
     }
 
     public Livro getLivro() {

@@ -34,8 +34,8 @@ public class Editora implements Serializable {
     private Integer idEditora;
     @Column(name = "nome_editora")
     private String nomeEditora;
-    @Column(name = "cnpj")
-    private String cnpj;
+    @Column(name = "cnpj_editora")
+    private String cnpjEditora;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editoraIdEditora")
     private List<Endereco> enderecoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editoraIdEditora")
@@ -64,12 +64,12 @@ public class Editora implements Serializable {
         this.nomeEditora = nomeEditora;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getCnpjEditora() {
+        return cnpjEditora;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setCnpjEditora(String cnpjEditora) {
+        this.cnpjEditora = cnpjEditora;
     }
 
     public List<Endereco> getEnderecoList() {
