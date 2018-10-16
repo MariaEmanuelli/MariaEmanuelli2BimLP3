@@ -12,47 +12,47 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author a1603140
  */
 @Embeddable
 public class ItensEmprestimoPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "id_livro")
-    private int idLivro;
+    @Column(name = "livro_id")
+    private int livroId;
     @Basic(optional = false)
-    @Column(name = "id_emprestimo")
-    private int idEmprestimo;
+    @Column(name = "emprestimo_id_emprestimo")
+    private int emprestimoIdEmprestimo;
 
     public ItensEmprestimoPK() {
     }
 
-    public ItensEmprestimoPK(int idLivro, int idEmprestimo) {
-        this.idLivro = idLivro;
-        this.idEmprestimo = idEmprestimo;
+    public ItensEmprestimoPK(int livroId, int emprestimoIdEmprestimo) {
+        this.livroId = livroId;
+        this.emprestimoIdEmprestimo = emprestimoIdEmprestimo;
     }
 
-    public int getIdLivro() {
-        return idLivro;
+    public int getLivroId() {
+        return livroId;
     }
 
-    public void setIdLivro(int idLivro) {
-        this.idLivro = idLivro;
+    public void setLivroId(int livroId) {
+        this.livroId = livroId;
     }
 
-    public int getIdEmprestimo() {
-        return idEmprestimo;
+    public int getEmprestimoIdEmprestimo() {
+        return emprestimoIdEmprestimo;
     }
 
-    public void setIdEmprestimo(int idEmprestimo) {
-        this.idEmprestimo = idEmprestimo;
+    public void setEmprestimoIdEmprestimo(int emprestimoIdEmprestimo) {
+        this.emprestimoIdEmprestimo = emprestimoIdEmprestimo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) idLivro;
-        hash += (int) idEmprestimo;
+        hash += (int) livroId;
+        hash += (int) emprestimoIdEmprestimo;
         return hash;
     }
 
@@ -63,10 +63,10 @@ public class ItensEmprestimoPK implements Serializable {
             return false;
         }
         ItensEmprestimoPK other = (ItensEmprestimoPK) object;
-        if (this.idLivro != other.idLivro) {
+        if (this.livroId != other.livroId) {
             return false;
         }
-        if (this.idEmprestimo != other.idEmprestimo) {
+        if (this.emprestimoIdEmprestimo != other.emprestimoIdEmprestimo) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class ItensEmprestimoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.ItensEmprestimoPK[ idLivro=" + idLivro + ", idEmprestimo=" + idEmprestimo + " ]";
+        return "Entidades.ItensEmprestimoPK[ livroId=" + livroId + ", emprestimoIdEmprestimo=" + emprestimoIdEmprestimo + " ]";
     }
-    
+
 }

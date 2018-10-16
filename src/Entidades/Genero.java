@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author a1603140
  */
 @Entity
 @Table(name = "genero")
@@ -92,5 +92,5 @@ public class Genero implements Serializable {
     public String toString() {
         return "Entidades.Genero[ idGenero=" + idGenero + " ]";
     }
-    
+
 }

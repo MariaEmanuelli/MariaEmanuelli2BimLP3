@@ -1,6 +1,6 @@
-package tools;
+package GUIs;
 
-import Entidades.Genero;
+import Entidades.Cliente;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -10,14 +10,15 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
-public class GeneroGUIListagem extends JDialog {
+
+public class ClienteGUIListagem extends JDialog {
 
     JPanel painelTa = new JPanel();
     ScrollPane scroll = new ScrollPane();
     JTextArea ta = new JTextArea();
 
-    public GeneroGUIListagem(List<Genero> texto, int posX, int posY) {
-        setTitle("Listagem de Genero");
+    public ClienteGUIListagem(List<Cliente> texto, int posX, int posY) {
+        setTitle("Listagem de Cliente");
         setSize(500, 180);//tamanho da janela
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);//libera ao sair (tira da memória a classe
         setLayout(new BorderLayout());//informa qual gerenciador de layout será usado
@@ -42,4 +43,3 @@ public class GeneroGUIListagem extends JDialog {
         setVisible(true);//faz a janela ficar visível        
     }
 }
-

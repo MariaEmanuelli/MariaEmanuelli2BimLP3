@@ -33,16 +33,16 @@ import javax.swing.JPanel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class MenuPrincipal extends JFrame {
-
+    
     Container cp;
     JPanel pnNorte = new JPanel();
     JPanel pnCentro = new JPanel();
     JLabel lbTitulo = new JLabel("Biblioteca Municipal");
-
+    
     Font fonte = new Font("Monotype Corsiva", Font.BOLD, 30);
-
+    
     JLabel labelComImagemDeTamanhoDiferente = new JLabel();
-
+    
     JMenuBar menuBar = new JMenuBar();
     JMenu menuCadastros = new JMenu("Cadastros");
     JMenuItem cadLivro = new JMenuItem("Livro");
@@ -62,12 +62,12 @@ public class MenuPrincipal extends JFrame {
     JMenu menuScreen = new JMenu("Posicionamento no monitor");
     JMenuItem posicaoNaJanela = new JMenuItem("Onde está...");
     Point p;
-
+    
     public MenuPrincipal(Dimension dimensao) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(dimensao);
         setTitle(lbTitulo.getText());
-
+        
         cp = getContentPane();
         cp.setLayout(new BorderLayout());
         pnNorte.add(lbTitulo);
@@ -80,7 +80,7 @@ public class MenuPrincipal extends JFrame {
             Image imagemAux;
             imagemAux = icone.getImage();
             icone.setImage(imagemAux.getScaledInstance(674, 208, Image.SCALE_FAST));
-
+            
             labelComImagemDeTamanhoDiferente = new JLabel();
             labelComImagemDeTamanhoDiferente.setIcon(icone);
         } catch (Exception e) {
@@ -95,14 +95,14 @@ public class MenuPrincipal extends JFrame {
 //            }
 //        });
         cadEditora.addActionListener(new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditoraGUI editoraGUI = new EditoraGUI(p, dimensao);
             }
         });
         cadAutor.addActionListener(new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 AutorGUI autorGUI = new AutorGUI(p, dimensao);
@@ -111,7 +111,7 @@ public class MenuPrincipal extends JFrame {
         );
         cadCliente.addActionListener(
                 new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e
             ) {
@@ -119,23 +119,24 @@ public class MenuPrincipal extends JFrame {
             }
         }
         );
-
+        
         cadGenero.addActionListener(
                 new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
-                GeneroGUI generoGUI = new GeneroGUI(p, dimensao);
+                GeneroGUI generoGUI = new GeneroGUI();
             }
         }
         );
-
+        
         cadStatus.addActionListener(
                 new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
-                StatusGUI statusGUI = new StatusGUI(p, dimensao);            }
+                StatusGUI statusGUI = new StatusGUI(p, dimensao);
+            }
         }
         );
 
@@ -188,10 +189,10 @@ public class MenuPrincipal extends JFrame {
 //        });
         pnCentro.add(labelComImagemDeTamanhoDiferente);
         pnCentro.setBackground(Color.BLACK);
-
+        
         cp.add(pnNorte, BorderLayout.NORTH);
         cp.add(pnCentro, BorderLayout.CENTER);
-
+        
         setJMenuBar(menuBar);
         menuBar.add(menuCadastros);
 //        menuBar.add(menuDoc);
@@ -212,17 +213,17 @@ public class MenuPrincipal extends JFrame {
 //        menuCompor.add(cadItensVenda);
         menuScreen.setVisible(false); //mostrar se precisar ajustar a posicao na tela
         menuBar.add(menuScreen);
-
+        
         menuScreen.add(posicaoNaJanela);
-
+        
         posicaoNaJanela.addActionListener(new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("X " + getBounds().x);
             }
         });
-
+        
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -230,9 +231,9 @@ public class MenuPrincipal extends JFrame {
                 System.exit(0);
             }
         });
-
-        setVisible(true);
         pack();
-
+        setLocationRelativeTo(null);
+        setVisible(true);
+        
     }
 }

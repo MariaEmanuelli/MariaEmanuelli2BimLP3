@@ -45,11 +45,11 @@ public class DAOEditora extends DAOGenerico<Editora> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getIdEditora()+ "-" + lf.get(i).getNomeEditora());
+            ls.add(lf.get(i).getIdEditora() + "-" + lf.get(i).getNomeEditora());
         }
         return ls;
     }
-    
+
     public static void main(String[] args) {
         DAOEditora daoEditora = new DAOEditora();
         List<Editora> listaEditora = daoEditora.list();

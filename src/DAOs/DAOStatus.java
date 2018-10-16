@@ -45,11 +45,11 @@ public class DAOStatus extends DAOGenerico<Status> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getIdStatus()+ "-" + lf.get(i).getNomeStatus());
+            ls.add(lf.get(i).getIdStatus() + "-" + lf.get(i).getNomeStatus());
         }
         return ls;
     }
-    
+
     public static void main(String[] args) {
         DAOStatus daoStatus = new DAOStatus();
         List<Status> listaStatus = daoStatus.list();

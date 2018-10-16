@@ -43,4 +43,3 @@ public class DAOGenerico<T> {
         return em.createQuery("SELECT e FROM " + clazz.getSimpleName() + " e").getResultList();
     }
 }
-

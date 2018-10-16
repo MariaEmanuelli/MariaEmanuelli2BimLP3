@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author a1603140
  */
 @Entity
 @Table(name = "status")
@@ -92,5 +92,5 @@ public class Status implements Serializable {
     public String toString() {
         return "Entidades.Status[ idStatus=" + idStatus + " ]";
     }
-    
+
 }

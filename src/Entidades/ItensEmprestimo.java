@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author a1603140
  */
 @Entity
 @Table(name = "itens_emprestimo")
@@ -34,12 +34,12 @@ public class ItensEmprestimo implements Serializable {
     @Column(name = "data_devolucao")
     @Temporal(TemporalType.DATE)
     private Date dataDevolucao;
-    @JoinColumn(name = "id_livro", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Livro livro;
-    @JoinColumn(name = "id_emprestimo", referencedColumnName = "id_emprestimo", insertable = false, updatable = false)
+    @JoinColumn(name = "emprestimo_id_emprestimo", referencedColumnName = "id_emprestimo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Emprestimo emprestimo;
+    @JoinColumn(name = "livro_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Livro livro;
 
     public ItensEmprestimo() {
     }
@@ -48,8 +48,8 @@ public class ItensEmprestimo implements Serializable {
         this.itensEmprestimoPK = itensEmprestimoPK;
     }
 
-    public ItensEmprestimo(int idLivro, int idEmprestimo) {
-        this.itensEmprestimoPK = new ItensEmprestimoPK(idLivro, idEmprestimo);
+    public ItensEmprestimo(int livroId, int emprestimoIdEmprestimo) {
+        this.itensEmprestimoPK = new ItensEmprestimoPK(livroId, emprestimoIdEmprestimo);
     }
 
     public ItensEmprestimoPK getItensEmprestimoPK() {
@@ -68,20 +68,20 @@ public class ItensEmprestimo implements Serializable {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public Livro getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livro livro) {
-        this.livro = livro;
-    }
-
     public Emprestimo getEmprestimo() {
         return emprestimo;
     }
 
     public void setEmprestimo(Emprestimo emprestimo) {
         this.emprestimo = emprestimo;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
     }
 
     @Override
@@ -108,5 +108,5 @@ public class ItensEmprestimo implements Serializable {
     public String toString() {
         return "Entidades.ItensEmprestimo[ itensEmprestimoPK=" + itensEmprestimoPK + " ]";
     }
-    
+
 }

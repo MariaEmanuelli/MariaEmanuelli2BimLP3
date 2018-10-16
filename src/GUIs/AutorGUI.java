@@ -2,7 +2,6 @@ package GUIs;
 
 import DAOs.DAOAutor;
 import Entidades.Autor;
-import tools.AutorGUIListagem;
 import tools.MinhaJOptionPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,25 +15,18 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
-import java.text.SimpleDateFormat;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
-import tools.JanelaPesquisar;
+import myUtil.MyDateTimeFormat;
 import tools.ManipulaArquivo;
-import java.util.List;
-import java.util.ArrayList;
 
-public class AutorGUI extends JFrame {
+public class AutorGUI extends JDialog {
 
     JButton btnCreate;
     JButton btnRetrieve;
@@ -46,7 +38,9 @@ public class AutorGUI extends JFrame {
     JLabel labelIdAutor = new JLabel("IdAutor");
     JTextField textFieldIdAutor = new JTextField();
     JLabel labelNomeAutor = new JLabel("NomeAutor");
+    JLabel labelDataNascimento = new JLabel("DataNascimento");
     JTextField textFieldNomeAutor = new JTextField();
+    JTextField textFieldDataNascimento = new JTextField();
     JPanel aviso = new JPanel();
     JLabel labelAviso = new JLabel("");
     String acao = "";//variavel para facilitar insert e update 
@@ -54,6 +48,7 @@ public class AutorGUI extends JFrame {
     DAOAutor daoAutor = new DAOAutor();
     Autor autor = new Autor();
     ManipulaArquivo file = new ManipulaArquivo();
+    MyDateTimeFormat myDateTimeFormat = new MyDateTimeFormat();
 
     private void atvBotoes(boolean c, boolean r, boolean u, boolean d) {
         btnCreate.setEnabled(c);
@@ -73,7 +68,7 @@ public class AutorGUI extends JFrame {
         btnCancel.setVisible(!visivel);
     }
 
-    private void habilitarAtributos(boolean idAutor, boolean nomeAutor) {
+    private void habilitarAtributos(boolean idAutor, boolean nomeAutor,boolean dataNascimento) {
 
         if (idAutor) {
             textFieldIdAutor.requestFocus();
@@ -83,10 +78,12 @@ public class AutorGUI extends JFrame {
 
         textFieldIdAutor.setEditable(idAutor);
         textFieldNomeAutor.setEditable(nomeAutor);
+        textFieldDataNascimento.setEditable(dataNascimento);
     }
 
     public void zerarAtributos() {
         textFieldNomeAutor.setText("");
+        textFieldDataNascimento.setText("");
     }
 
     public AutorGUI(Point posicao, Dimension dimensao) {
@@ -107,7 +104,7 @@ public class AutorGUI extends JFrame {
         Container cp = getContentPane();//container principal, para adicionar nele os outros componentes
 
         atvBotoes(false, true, false, false);
-        habilitarAtributos(true, false);
+        habilitarAtributos(true, false, false);
         btnCreate.setToolTipText("Inserir novo registro");
         btnRetrieve.setToolTipText("Pesquisar por chave");
         btnUpdate.setToolTipText("Alterar");
@@ -126,11 +123,14 @@ public class AutorGUI extends JFrame {
         btnSave.setVisible(false);
         btnCancel.setVisible(false);  //atributos
         JPanel centro = new JPanel();
-        centro.setLayout(new GridLayout(2, 2));
+        centro.setLayout(new GridLayout(3, 2));
         centro.add(labelIdAutor);
         centro.add(textFieldIdAutor);
         centro.add(labelNomeAutor);
-        centro.add(textFieldNomeAutor);
+       
+        centro.add(textFieldNomeAutor); 
+        centro.add(labelDataNascimento);
+        centro.add(textFieldDataNascimento);
         aviso.add(labelAviso);
         aviso.setBackground(Color.yellow);
         cp.add(Toolbar1, BorderLayout.NORTH);
@@ -164,8 +164,9 @@ public class AutorGUI extends JFrame {
                         if (autor != null) { //se encontrou na lista
 
                             textFieldNomeAutor.setText(String.valueOf(autor.getNomeAutor()));
+                            textFieldDataNascimento.setText(myDateTimeFormat.getDateParaStringBr(autor.getDataNascimento()));
                             atvBotoes(false, true, true, true);
-                            habilitarAtributos(true, false);
+                            habilitarAtributos(true, false,false);
                             labelAviso.setText("Encontrou - clic [Pesquisar], [Alterar] ou [Excluir]");
                             acao = "encontrou";
                         } else {
@@ -186,7 +187,7 @@ public class AutorGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 zerarAtributos();
-                habilitarAtributos(false, true);
+                habilitarAtributos(false, true, true);
                 textFieldNomeAutor.requestFocus();
                 mostrarBotoes(false);
                 labelAviso.setText("Preencha os campos e clic [Salvar] ou clic [Cancelar]");
@@ -198,7 +199,7 @@ public class AutorGUI extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 acao = "update";
                 mostrarBotoes(false);
-                habilitarAtributos(false, true);
+                habilitarAtributos(false, true, true);
             }
         });
         btnDelete.addActionListener(new ActionListener() {
@@ -223,6 +224,7 @@ public class AutorGUI extends JFrame {
                     Autor autorNovo = new Autor();
                     autorNovo.setIdAutor(Integer.valueOf(textFieldIdAutor.getText()));
                     autorNovo.setNomeAutor(String.valueOf(textFieldNomeAutor.getText()));
+                    autorNovo.setDataNascimento(myDateTimeFormat.getStringParaDataBr(textFieldDataNascimento.getText()));
                     if (acao.equals("insert")) {
                         daoAutor.inserir(autorNovo);
                         labelAviso.setText("Registro inserido...");
@@ -231,7 +233,7 @@ public class AutorGUI extends JFrame {
                         daoAutor.atualizar(autorNovo);
                         labelAviso.setText("Registro atualizado...");
                     }
-                    habilitarAtributos(true, false);
+                    habilitarAtributos(true, false, false);
                     mostrarBotoes(true);
                     atvBotoes(false, true, false, false);
                 } catch (Exception err) {
@@ -248,7 +250,7 @@ public class AutorGUI extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 zerarAtributos();
                 atvBotoes(false, true, false, false);
-                habilitarAtributos(true, false);
+                habilitarAtributos(true, false, false);
                 mostrarBotoes(true);
             }
         });
@@ -286,7 +288,28 @@ public class AutorGUI extends JFrame {
                 textFieldNomeAutor.setBackground(Color.white);
             }
         });
+        textFieldDataNascimento.addFocusListener(new FocusListener() { //ao receber o foco, fica verde
+            @Override
+            public void focusGained(FocusEvent fe) {
+                textFieldDataNascimento.setBackground(Color.GREEN);
+            }
 
+            @Override
+            public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
+                textFieldDataNascimento.setBackground(Color.white);
+            }
+        });
+        
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE); //antes de sair do sistema, grava os dados da lista em disco
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Sai do sistema  
+                dispose();
+            }
+        });
+        
+        setModal(true);
         setVisible(true);//faz a janela ficar visível
         textFieldIdAutor.requestFocus();
 

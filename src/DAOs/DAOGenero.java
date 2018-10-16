@@ -45,11 +45,11 @@ public class DAOGenero extends DAOGenerico<Genero> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getIdGenero()+ "-" + lf.get(i).getNomeGenero());
+            ls.add(lf.get(i).getIdGenero() + "-" + lf.get(i).getNomeGenero());
         }
         return ls;
     }
-    
+
     public static void main(String[] args) {
         DAOGenero daoGenero = new DAOGenero();
         List<Genero> listaGenero = daoGenero.list();

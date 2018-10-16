@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
-import tools.GeneroGUIListagem;
+import tools.StatusGUIListagem;
 
 public class GeneroGUI extends JDialog {
 
@@ -48,7 +48,7 @@ public class GeneroGUI extends JDialog {
     JPanel aviso = new JPanel();
     JLabel labelAviso = new JLabel("");
     String acao = "";//variavel para facilitar insert e update
-    DAOGenero cl = new DAOGenero();
+    DAOGenero daoGenero = new DAOGenero();
     Genero genero;
     Genero generoOriginal;
 
@@ -138,6 +138,14 @@ public class GeneroGUI extends JDialog {
         setLocationRelativeTo(null); // posiciona no centro da tela principal
 
 // Listeners
+        btnList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                acao = "list";
+                GeneroGUIListagem listagem = new GeneroGUIListagem(daoGenero.list(), getBounds().x, getBounds().y);
+            }
+        });
+
         btnRetrieve.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -150,7 +158,7 @@ public class GeneroGUI extends JDialog {
                     textFieldId.selectAll();
                 } else {
                     genero.setIdGenero(Integer.valueOf(textFieldId.getText()));
-                    genero = cl.obter(genero.getIdGenero());
+                    genero = daoGenero.obter(genero.getIdGenero());
                     if (genero != null) { //se encontrou na lista
                         textFieldNome.setText(genero.getNomeGenero());
 
@@ -188,7 +196,7 @@ public class GeneroGUI extends JDialog {
                     genero.setIdGenero(Integer.valueOf(textFieldId.getText()));
                     genero.setNomeGenero(textFieldNome.getText());
 
-                    cl.inserir(genero);
+                    daoGenero.inserir(genero);
                     habilitarAtributos(true, false);
                     zerarAtributos();
                     mostrarBotoes(true);
@@ -198,7 +206,7 @@ public class GeneroGUI extends JDialog {
                     genero.setIdGenero(Integer.valueOf(textFieldId.getText()));
                     genero.setNomeGenero(textFieldNome.getText());
 
-                    cl.atualizar(genero);
+                    daoGenero.atualizar(genero);
                     mostrarBotoes(true);
                     habilitarAtributos(true, false);
                     atvBotoes(false, true, false, false);
@@ -241,7 +249,7 @@ public class GeneroGUI extends JDialog {
                         "Confirma a exclusão do registro <ID = " + genero.getIdGenero() + ">?", "Confirm",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)) {
                     labelAviso.setText("Registro excluído...");
-                    cl.remover(genero);
+                    daoGenero.remover(genero);
                     zerarAtributos();
                     textFieldId.requestFocus();
                     textFieldId.selectAll();

@@ -2,7 +2,6 @@ package GUIs;
 
 import DAOs.DAOCliente;
 import Entidades.Cliente;
-import tools.ClienteGUIListagem;
 import tools.MinhaJOptionPane;
 import java.awt.BorderLayout;
 import java.awt.Color;

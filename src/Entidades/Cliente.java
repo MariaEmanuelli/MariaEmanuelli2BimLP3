@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author a1603140
  */
 @Entity
 @Table(name = "cliente")
@@ -46,7 +46,7 @@ public class Cliente implements Serializable {
     private String email;
     @Column(name = "senha")
     private String senha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
     private List<Emprestimo> emprestimoList;
 
     public Cliente() {
@@ -152,5 +152,5 @@ public class Cliente implements Serializable {
     public String toString() {
         return "Entidades.Cliente[ id=" + id + " ]";
     }
-    
+
 }

@@ -2,7 +2,6 @@ package GUIs;
 
 import DAOs.DAOLivro;
 import Entidades.Livro;
-import tools.LivroGUIListagem;
 import tools.MinhaJOptionPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -382,6 +381,6 @@ public class LivroGUI extends JFrame {
 
     public static void main(String[] args) {
         new StatusGUI(new Point(880, 250), new Dimension(800, 600));
-    
+
     }
 }//fim

@@ -157,7 +157,7 @@ public class AtributoTableModel extends AbstractTableModel {
     public void addListaDeAtributos(List<Atributo> atributos) {
         // Pega o tamanho antigo da tabela.
         int tamanhoAntigo = getRowCount();
-        
+
         // Adiciona os registros.
         linhas.addAll(atributos);
 

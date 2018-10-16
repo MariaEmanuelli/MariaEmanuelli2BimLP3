@@ -45,11 +45,11 @@ public class DAOAutor extends DAOGenerico<Autor> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getIdAutor()+ "-" + lf.get(i).getNomeAutor());
+            ls.add(lf.get(i).getIdAutor() + "-" + lf.get(i).getNomeAutor());
         }
         return ls;
     }
-    
+
     public static void main(String[] args) {
         DAOAutor daoAutor = new DAOAutor();
         List<Autor> listaAutor = daoAutor.list();

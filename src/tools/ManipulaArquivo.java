@@ -1,6 +1,5 @@
 package tools;
 
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,14 +14,13 @@ public class ManipulaArquivo {
     public ManipulaArquivo() {
     }
 
-    
     public List<String> abrirArquivo(String caminho) {
-         
+
         List<String> texto = null;
         try {
             //OpenFile
             File file = new File(caminho);
-            if (file.exists()) {                
+            if (file.exists()) {
                 FileReader arquivo = new FileReader(caminho);
                 BufferedReader conteudoDoArquivo = new BufferedReader(arquivo);
                 String linha = conteudoDoArquivo.readLine();
@@ -56,17 +54,17 @@ public class ManipulaArquivo {
         }
         return 0;
     }
-    
-    public void novoArquivo(String caminho){
+
+    public void novoArquivo(String caminho) {
         String textoQueSeraEscrito = "";
-		FileWriter arquivo;
-		try {
-		    arquivo = new FileWriter(new File(caminho));
-		    arquivo.write(textoQueSeraEscrito);
-	            arquivo.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-                }
+        FileWriter arquivo;
+        try {
+            arquivo = new FileWriter(new File(caminho));
+            arquivo.write(textoQueSeraEscrito);
+            arquivo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    
+
 }

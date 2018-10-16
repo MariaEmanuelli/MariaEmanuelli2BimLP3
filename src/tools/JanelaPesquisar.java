@@ -1,7 +1,5 @@
 package tools;
 
-
-
 // @author Radames
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -21,10 +19,10 @@ public class JanelaPesquisar extends JDialog {
 
     private String valorRetornado = "";
     private List<String> lista;
-    private int x=0;
-    private int y=0;
+    private int x = 0;
+    private int y = 0;
 
-    public JanelaPesquisar(List<String> lista, int x,int y) {//esse construtor é importante para receber dados 
+    public JanelaPesquisar(List<String> lista, int x, int y) {//esse construtor é importante para receber dados 
         this.lista = lista;
         this.x = x;
         this.y = y;
@@ -70,10 +68,10 @@ public class JanelaPesquisar extends JDialog {
         cp.add(painelCentro, BorderLayout.CENTER);
         cp.add(painelDireita, BorderLayout.EAST);
         cp.add(new JLabel("<Clic duplo = seleciona>"), BorderLayout.SOUTH);
-       
+
         //setLocationRelativeTo(null);
-        setLocation(x- getWidth() / 2, y+50);
-        
+        setLocation(x - getWidth() / 2, y + 50);
+
         list.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) { //clic duplo
@@ -107,7 +105,7 @@ public class JanelaPesquisar extends JDialog {
 
             @Override
             public void windowActivated(WindowEvent we) {
-                
+
             }
 
             @Override
@@ -117,4 +115,3 @@ public class JanelaPesquisar extends JDialog {
 
     }
 }
-

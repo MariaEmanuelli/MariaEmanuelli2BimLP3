@@ -1,6 +1,6 @@
-package tools;
+package GUIs;
 
-import Entidades.Autor;
+import Entidades.Livro;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -10,14 +10,15 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
-public class AutorGUIListagem extends JDialog {
+
+public class LivroGUIListagem extends JDialog {
 
     JPanel painelTa = new JPanel();
     ScrollPane scroll = new ScrollPane();
     JTextArea ta = new JTextArea();
 
-    public AutorGUIListagem(List<Autor> texto, int posX, int posY) {
-        setTitle("Listagem de Autor");
+    public LivroGUIListagem(List<Livro> texto, int posX, int posY) {
+        setTitle("Listagem de Livro");
         setSize(500, 180);//tamanho da janela
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);//libera ao sair (tira da memória a classe
         setLayout(new BorderLayout());//informa qual gerenciador de layout será usado
@@ -42,4 +43,3 @@ public class AutorGUIListagem extends JDialog {
         setVisible(true);//faz a janela ficar visível        
     }
 }
-

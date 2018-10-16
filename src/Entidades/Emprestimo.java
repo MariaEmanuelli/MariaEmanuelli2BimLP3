@@ -6,21 +6,25 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author a1603140
  */
 @Entity
 @Table(name = "emprestimo")
@@ -29,49 +33,54 @@ import javax.persistence.Table;
 public class Emprestimo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected EmprestimoPK emprestimoPK;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "id_emprestimo")
+    private Integer idEmprestimo;
+    @Basic(optional = false)
     @Column(name = "data_retirada")
-    private String dataRetirada;
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataRetirada;
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Cliente cliente;
+    private Cliente clienteId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "emprestimo")
     private List<ItensEmprestimo> itensEmprestimoList;
 
     public Emprestimo() {
     }
 
-    public Emprestimo(EmprestimoPK emprestimoPK) {
-        this.emprestimoPK = emprestimoPK;
+    public Emprestimo(Integer idEmprestimo) {
+        this.idEmprestimo = idEmprestimo;
     }
 
-    public Emprestimo(int idEmprestimo, int idCliente) {
-        this.emprestimoPK = new EmprestimoPK(idEmprestimo, idCliente);
-    }
-
-    public EmprestimoPK getEmprestimoPK() {
-        return emprestimoPK;
-    }
-
-    public void setEmprestimoPK(EmprestimoPK emprestimoPK) {
-        this.emprestimoPK = emprestimoPK;
-    }
-
-    public String getDataRetirada() {
-        return dataRetirada;
-    }
-
-    public void setDataRetirada(String dataRetirada) {
+    public Emprestimo(Integer idEmprestimo, Date dataRetirada) {
+        this.idEmprestimo = idEmprestimo;
         this.dataRetirada = dataRetirada;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Integer getIdEmprestimo() {
+        return idEmprestimo;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setIdEmprestimo(Integer idEmprestimo) {
+        this.idEmprestimo = idEmprestimo;
+    }
+
+    public Date getDataRetirada() {
+        return dataRetirada;
+    }
+
+    public void setDataRetirada(Date dataRetirada) {
+        this.dataRetirada = dataRetirada;
+    }
+
+    public Cliente getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Cliente clienteId) {
+        this.clienteId = clienteId;
     }
 
     public List<ItensEmprestimo> getItensEmprestimoList() {
@@ -85,7 +94,7 @@ public class Emprestimo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (emprestimoPK != null ? emprestimoPK.hashCode() : 0);
+        hash += (idEmprestimo != null ? idEmprestimo.hashCode() : 0);
         return hash;
     }
 
@@ -96,7 +105,7 @@ public class Emprestimo implements Serializable {
             return false;
         }
         Emprestimo other = (Emprestimo) object;
-        if ((this.emprestimoPK == null && other.emprestimoPK != null) || (this.emprestimoPK != null && !this.emprestimoPK.equals(other.emprestimoPK))) {
+        if ((this.idEmprestimo == null && other.idEmprestimo != null) || (this.idEmprestimo != null && !this.idEmprestimo.equals(other.idEmprestimo))) {
             return false;
         }
         return true;
@@ -104,7 +113,7 @@ public class Emprestimo implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Emprestimo[ emprestimoPK=" + emprestimoPK + " ]";
+        return "Entidades.Emprestimo[ idEmprestimo=" + idEmprestimo + " ]";
     }
-    
+
 }

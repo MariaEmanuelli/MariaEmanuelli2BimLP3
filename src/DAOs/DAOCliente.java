@@ -45,11 +45,11 @@ public class DAOCliente extends DAOGenerico<Cliente> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getId()+ "-" + lf.get(i).getNome());
+            ls.add(lf.get(i).getId() + "-" + lf.get(i).getNome());
         }
         return ls;
     }
-    
+
     public static void main(String[] args) {
         DAOCliente daoCliente = new DAOCliente();
         List<Cliente> listaCliente = daoCliente.list();

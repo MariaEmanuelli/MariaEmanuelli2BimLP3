@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author a1603140
  */
 @Entity
 @Table(name = "endereco")
@@ -112,5 +112,5 @@ public class Endereco implements Serializable {
     public String toString() {
         return "Entidades.Endereco[ idEndereco=" + idEndereco + " ]";
     }
-    
+
 }

@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author a1603140
  */
 @Entity
 @Table(name = "livro")
@@ -172,5 +172,5 @@ public class Livro implements Serializable {
     public String toString() {
         return "Entidades.Livro[ id=" + id + " ]";
     }
-    
+
 }

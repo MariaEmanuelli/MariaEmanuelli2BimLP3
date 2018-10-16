@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
+
 public class EmprestimoGUIListagem extends JDialog {
 
     JPanel painelTa = new JPanel();
@@ -42,4 +43,3 @@ public class EmprestimoGUIListagem extends JDialog {
         setVisible(true);//faz a janela ficar visível        
     }
 }
-
