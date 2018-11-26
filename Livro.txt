@@ -1,0 +1,8 @@
+idLivro;int;a
+nomeLivro;String;a
+edicao;String;a
+editora;String;a
+autor;String;a
+anoPublicacao;Date;dd/MM/yyyy
+qntEstoque;int;a
+status;boolean;a
