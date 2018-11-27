@@ -1,6 +1,6 @@
 package GUIs;
 
-import DAOs.DAOAutor;
+import DAOs.DAOLivro;
 import DAOs.DAOEditora;
 import DAOs.DAOGenero;
 import DAOs.DAOLivro1;
@@ -53,8 +53,8 @@ public class LivroGUI extends JDialog {
     JTextField textFieldAnoPublicacao = new JTextField();
     JLabel labelQntEstoque = new JLabel("quantidadeEstoque");
     JTextField textFieldQntEstoque = new JTextField();
-    JLabel labelAutor = new JLabel("Autor");
-    JTextField textFieldAutor = new JTextField();
+    JLabel labelLivro = new JLabel("Livro");
+    JTextField textFieldLivro = new JTextField();
     JLabel labelGenero = new JLabel("Genero");
     JTextField textFieldGenero = new JTextField();
     JLabel labelStatus = new JLabel("Status");
@@ -102,7 +102,7 @@ public class LivroGUI extends JDialog {
         textFieldAnoPublicacao.setEditable(dataPublicacao);
         textFieldEdicao.setEditable(edicao);
         textFieldEditora.setEditable(editora);
-        textFieldAutor.setEditable(autor);
+        textFieldLivro.setEditable(autor);
         textFieldGenero.setEditable(genero);
         textFieldStatus.setEditable(status);
         textFieldQntEstoque.setEditable(qntEstoque);
@@ -158,8 +158,8 @@ public class LivroGUI extends JDialog {
         centro.add(textFieldNomeLivro);
         centro.add(labelAnoPublicacao);
         centro.add(textFieldAnoPublicacao);
-        centro.add(labelAutor);
-        centro.add(textFieldAutor);
+        centro.add(labelLivro);
+        centro.add(textFieldLivro);
         centro.add(labelEdicao);
         centro.add(textFieldEdicao);
         centro.add(labelEditora);
@@ -381,10 +381,10 @@ public class LivroGUI extends JDialog {
             }
         });
         
-        textFieldAutor.addActionListener(new ActionListener() {
+        textFieldLivro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                List<String> listaAuxiliar = new DAOAutor().listInOrderNomeStrings("id");
+                List<String> listaAuxiliar = new DAOLivro().listInOrderNomeStrings("id");
                     if (listaAuxiliar.size() > 0) {
                         Point lc = btnRetrieve.getLocationOnScreen();
                         lc.x = lc.x + btnRetrieve.getWidth();
@@ -393,7 +393,7 @@ public class LivroGUI extends JDialog {
                                 lc.y).getValorRetornado();
                         if (!selectedItem.equals("")) {
                             String[] aux = selectedItem.split("-");
-                            textFieldAutor.setText(aux[0]);
+                            textFieldLivro.setText(aux[0]);
                         } 
                     }
                 }

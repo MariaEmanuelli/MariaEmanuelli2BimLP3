@@ -1,4 +1,4 @@
-package daos;
+package DAOs;
 
 import DAOs.DAOGenerico;
 import static DAOs.DAOGenerico.em;
