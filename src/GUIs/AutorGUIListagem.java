@@ -1,5 +1,6 @@
 package GUIs;
 
+import DAOs.DAOAutor;
 import Entidades.Autor;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,11 +14,10 @@ import javax.swing.JToolBar;
 
 public class AutorGUIListagem extends JDialog {
 
+    List<Autor> texto;
     JPanel painelTa = new JPanel();
     ScrollPane scroll = new ScrollPane();
     JTextArea ta = new JTextArea();
-    
-    List<Autor> texto;
     int posX;
     int posY;
 
@@ -33,8 +33,9 @@ public class AutorGUIListagem extends JDialog {
         this.posY = posY;
         inicializar();
     }
-    
+
     private void inicializar() {
+        List<Autor> texto = new DAOAutor().list();
         setTitle("Listagem de Autor");
         setSize(500, 180);//tamanho da janela
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);//libera ao sair (tira da memória a classe
@@ -59,6 +60,4 @@ public class AutorGUIListagem extends JDialog {
         setLocation(posX + 20, posY + 20);
         setVisible(true);//faz a janela ficar visível        
     }
-
-
 }
