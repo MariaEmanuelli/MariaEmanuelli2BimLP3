@@ -1,5 +1,6 @@
 package GUIs;
 
+import GUIs.GUIListagem.GeneroGUIListagem;
 import DAOs.DAOGenero;
 import Entidades.Genero;
 import java.awt.BorderLayout;
@@ -119,7 +120,7 @@ public class GeneroGUI extends JDialog {
         btnSave.setVisible(false);
         btnCancel.setVisible(false);  //atributos
         JPanel centro = new JPanel();
-        centro.setLayout(new GridLayout(3, 2));
+        centro.setLayout(new GridLayout(2, 2));
         centro.add(labelId);
         centro.add(textFieldId);
         centro.add(labelNome);

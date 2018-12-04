@@ -1,5 +1,6 @@
 package GUIs;
 
+import GUIs.GUIListagem.AutorGUIListagem;
 import DAOs.DAOAutor;
 import Entidades.Autor;
 import tools.MinhaJOptionPane;

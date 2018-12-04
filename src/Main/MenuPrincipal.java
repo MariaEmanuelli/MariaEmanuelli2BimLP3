@@ -2,12 +2,13 @@ package Main;
 
 //import CrudTeste.TesteGUI;
 //import CrudGenero.GeneroGUI;
-import DAOs.DAOLivro1;
+import DAOs.DAOCliente;
 import GUIs.AutorGUI;
-import GUIs.AutorGUIListagem;
+import GUIs.GUIListagem.AutorGUIListagem;
 import GUIs.ClienteGUI;
 import GUIs.EditoraGUI;
-import GUIs.EditoraGUIListagem;
+import GUIs.EmprestimoGUI;
+import GUIs.GUIListagem.EditoraGUIListagem;
 import GUIs.GeneroGUI;
 import GUIs.LivroGUI;
 import GUIs.StatusGUI;
@@ -33,6 +34,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.Position;
+import javax.swing.text.Segment;
 
 public class MenuPrincipal extends JFrame {
     
@@ -62,13 +71,13 @@ public class MenuPrincipal extends JFrame {
     JMenuItem listEmprestimo = new JMenuItem("Emprestimo");
     JMenuItem cadStatus = new JMenuItem("Status");
     JMenuItem listStatus = new JMenuItem("Status");
-//    JMenu menuCompor = new JMenu("Composicoes");
-//    JMenu menuDoc = new JMenu("Documentos");
+    JMenu menuCompor = new JMenu("Composicoes");
+    JMenu menuDoc = new JMenu("Documentos");
 
-//    JMenuItem cadItensVenda = new JMenuItem("Itens venda");
-//    
-//    JMenuItem cadPDFCliente = new JMenuItem("Lista de clientes");
-//    JMenuItem cadPDFLivro = new JMenuItem("Lista de filmes");
+    JMenuItem cadItensEmprestimo = new JMenuItem("Itens emprestimo");
+    
+    JMenuItem cadPDFCliente = new JMenuItem("Lista de clientes");
+    JMenuItem cadPDFLivro = new JMenuItem("Lista de filmes");
     JMenu menuScreen = new JMenu("Posicionamento no monitor");
     JMenuItem posicaoNaJanela = new JMenuItem("Onde está...");
     Point p;
@@ -144,6 +153,23 @@ public class MenuPrincipal extends JFrame {
             }
         }
         );
+        cadEmprestimo.addActionListener(
+                new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                EmprestimoGUI emprestimoGUI = new EmprestimoGUI(p, dimensao);
+            }
+        }
+        );
+        listEditora.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditoraGUIListagem editoraGUIListagem = new EditoraGUIListagem(100, 200);
+            }
+        });
         
         cadGenero.addActionListener(
                 new ActionListener() {
@@ -169,7 +195,92 @@ public class MenuPrincipal extends JFrame {
 //        cadPDFCliente.addActionListener(new ActionListener() {
 //            @Override
 //        public void actionPerformed(ActionEvent e) {
-//                Document documentoPDF = new Document();
+//                Document documentoPDF = new Document() {
+//                    @Override
+//                    public int getLength() {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void addDocumentListener(DocumentListener dl) {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void removeDocumentListener(DocumentListener dl) {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void addUndoableEditListener(UndoableEditListener ul) {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void removeUndoableEditListener(UndoableEditListener ul) {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public Object getProperty(Object o) {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void putProperty(Object o, Object o1) {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void remove(int i, int i1) throws BadLocationException {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void insertString(int i, String string, AttributeSet as) throws BadLocationException {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public String getText(int i, int i1) throws BadLocationException {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void getText(int i, int i1, Segment sgmnt) throws BadLocationException {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public Position getStartPosition() {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public Position getEndPosition() {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public Position createPosition(int i) throws BadLocationException {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public Element[] getRootElements() {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public Element getDefaultRootElement() {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//
+//                    @Override
+//                    public void render(Runnable r) {
+//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                    }
+//                };
 //
 //                try {
 //                    PdfWriter.getInstance(documentoPDF, new FileOutputStream("D:\\PDF_Cliente.pdf"));
@@ -245,7 +356,7 @@ public class MenuPrincipal extends JFrame {
 //
 //        menuBar.add(menuCompor);
 //
-//        menuCompor.add(cadItensVenda);
+        menuCompor.add(cadItensEmprestimo);
         menuScreen.setVisible(false); //mostrar se precisar ajustar a posicao na tela
         menuBar.add(menuScreen);
         

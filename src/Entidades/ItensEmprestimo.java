@@ -7,9 +7,10 @@ package Entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -29,35 +30,25 @@ import javax.persistence.TemporalType;
 public class ItensEmprestimo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ItensEmprestimoPK itensEmprestimoPK;
     @Column(name = "data_devolucao")
     @Temporal(TemporalType.DATE)
     private Date dataDevolucao;
-    @JoinColumn(name = "emprestimo_id_emprestimo", referencedColumnName = "id_emprestimo", insertable = false, updatable = false)
+    @Id
+    @Basic(optional = false)
+    @Column(name = "id_itens_emprestimo")
+    private Integer idItensEmprestimo;
+    @JoinColumn(name = "emprestimo_id_emprestimo", referencedColumnName = "id_emprestimo")
     @ManyToOne(optional = false)
-    private Emprestimo emprestimo;
-    @JoinColumn(name = "livro_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Emprestimo emprestimoIdEmprestimo;
+    @JoinColumn(name = "livro_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Livro livro;
+    private Livro livroId;
 
     public ItensEmprestimo() {
     }
 
-    public ItensEmprestimo(ItensEmprestimoPK itensEmprestimoPK) {
-        this.itensEmprestimoPK = itensEmprestimoPK;
-    }
-
-    public ItensEmprestimo(int livroId, int emprestimoIdEmprestimo) {
-        this.itensEmprestimoPK = new ItensEmprestimoPK(livroId, emprestimoIdEmprestimo);
-    }
-
-    public ItensEmprestimoPK getItensEmprestimoPK() {
-        return itensEmprestimoPK;
-    }
-
-    public void setItensEmprestimoPK(ItensEmprestimoPK itensEmprestimoPK) {
-        this.itensEmprestimoPK = itensEmprestimoPK;
+    public ItensEmprestimo(Integer idItensEmprestimo) {
+        this.idItensEmprestimo = idItensEmprestimo;
     }
 
     public Date getDataDevolucao() {
@@ -68,26 +59,34 @@ public class ItensEmprestimo implements Serializable {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public Emprestimo getEmprestimo() {
-        return emprestimo;
+    public Integer getIdItensEmprestimo() {
+        return idItensEmprestimo;
     }
 
-    public void setEmprestimo(Emprestimo emprestimo) {
-        this.emprestimo = emprestimo;
+    public void setIdItensEmprestimo(Integer idItensEmprestimo) {
+        this.idItensEmprestimo = idItensEmprestimo;
     }
 
-    public Livro getLivro() {
-        return livro;
+    public Emprestimo getEmprestimoIdEmprestimo() {
+        return emprestimoIdEmprestimo;
     }
 
-    public void setLivro(Livro livro) {
-        this.livro = livro;
+    public void setEmprestimoIdEmprestimo(Emprestimo emprestimoIdEmprestimo) {
+        this.emprestimoIdEmprestimo = emprestimoIdEmprestimo;
+    }
+
+    public Livro getLivroId() {
+        return livroId;
+    }
+
+    public void setLivroId(Livro livroId) {
+        this.livroId = livroId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (itensEmprestimoPK != null ? itensEmprestimoPK.hashCode() : 0);
+        hash += (idItensEmprestimo != null ? idItensEmprestimo.hashCode() : 0);
         return hash;
     }
 
@@ -98,7 +97,7 @@ public class ItensEmprestimo implements Serializable {
             return false;
         }
         ItensEmprestimo other = (ItensEmprestimo) object;
-        if ((this.itensEmprestimoPK == null && other.itensEmprestimoPK != null) || (this.itensEmprestimoPK != null && !this.itensEmprestimoPK.equals(other.itensEmprestimoPK))) {
+        if ((this.idItensEmprestimo == null && other.idItensEmprestimo != null) || (this.idItensEmprestimo != null && !this.idItensEmprestimo.equals(other.idItensEmprestimo))) {
             return false;
         }
         return true;
@@ -106,7 +105,7 @@ public class ItensEmprestimo implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.ItensEmprestimo[ itensEmprestimoPK=" + itensEmprestimoPK + " ]";
+        return "Entidades.ItensEmprestimo[ idItensEmprestimo=" + idItensEmprestimo + " ]";
     }
     
 }

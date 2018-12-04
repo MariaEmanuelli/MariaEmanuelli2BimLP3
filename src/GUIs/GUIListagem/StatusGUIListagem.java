@@ -1,4 +1,4 @@
-package GUIs;
+package GUIs.GUIListagem;
 
 import DAOs.DAOStatus;
 import Entidades.Status;

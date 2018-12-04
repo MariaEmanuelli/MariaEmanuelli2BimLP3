@@ -1,7 +1,7 @@
-package GUIs;
+package GUIs.GUIListagem;
 
-import DAOs.DAOGenero;
-import Entidades.Genero;
+import DAOs.DAOLivro;
+import Entidades.Livro;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -12,31 +12,31 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 
-public class GeneroGUIListagem extends JDialog {
+public class LivroGUIListagem extends JDialog {
 
-    List<Genero> texto;
+    List<Livro> texto;
     JPanel painelTa = new JPanel();
     ScrollPane scroll = new ScrollPane();
     JTextArea ta = new JTextArea();
     int posX;
     int posY;
 
-    public GeneroGUIListagem(List<Genero> texto, int posX, int posY) {
+    public LivroGUIListagem(List<Livro> texto, int posX, int posY) {
         this.texto = texto;
         this.posX = posX;
         this.posY = posY;
         inicializar();
     }
 
-    public GeneroGUIListagem(int posX, int posY) {
+    public LivroGUIListagem(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         inicializar();
     }
 
     private void inicializar() {
-        List<Genero> texto = new DAOGenero().list();
-        setTitle("Listagem de Genero");
+        List<Livro> texto = new DAOLivro().list();
+        setTitle("Listagem de Livro");
         setSize(500, 180);//tamanho da janela
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);//libera ao sair (tira da memória a classe
         setLayout(new BorderLayout());//informa qual gerenciador de layout será usado

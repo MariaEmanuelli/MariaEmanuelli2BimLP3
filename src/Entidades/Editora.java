@@ -37,8 +37,7 @@ public class Editora implements Serializable {
     @Column(name = "cnpj")
     private String cnpj;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editoraIdEditora")
-    private List<Endereco> enderecoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editoraIdEditora")
+    
     private List<Livro> livroList;
 
     public Editora() {
@@ -72,13 +71,6 @@ public class Editora implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public List<Endereco> getEnderecoList() {
-        return enderecoList;
-    }
-
-    public void setEnderecoList(List<Endereco> enderecoList) {
-        this.enderecoList = enderecoList;
-    }
 
     public List<Livro> getLivroList() {
         return livroList;

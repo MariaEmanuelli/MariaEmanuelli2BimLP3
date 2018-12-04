@@ -43,7 +43,7 @@ public class Emprestimo implements Serializable {
     private Date dataRetirada;
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Cliente clienteId;
+    private Cliente idCliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "emprestimo")
     private List<ItensEmprestimo> itensEmprestimoList;
 
@@ -75,12 +75,12 @@ public class Emprestimo implements Serializable {
         this.dataRetirada = dataRetirada;
     }
 
-    public Cliente getClienteId() {
-        return clienteId;
+    public Cliente getIdCliente() {
+        return idCliente;
     }
 
-    public void setClienteId(Cliente clienteId) {
-        this.clienteId = clienteId;
+    public void setIdCliente(Cliente idCliente) {
+        this.idCliente = idCliente;
     }
 
     public List<ItensEmprestimo> getItensEmprestimoList() {

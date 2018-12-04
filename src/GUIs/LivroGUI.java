@@ -1,9 +1,11 @@
 package GUIs;
 
+import GUIs.GUIListagem.LivroGUIListagem;
+import DAOs.DAOAutor;
 import DAOs.DAOLivro;
 import DAOs.DAOEditora;
 import DAOs.DAOGenero;
-import DAOs.DAOLivro1;
+import DAOs.DAOStatus;
 import Entidades.Livro;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,6 +32,7 @@ import java.text.SimpleDateFormat;
 import tools.ManipulaArquivo;
 import java.util.List;
 import javax.swing.JDialog;
+import tools.MinhaJOptionPane;
 
 public class LivroGUI extends JDialog {
 
@@ -48,13 +51,13 @@ public class LivroGUI extends JDialog {
     JTextField textFieldEdicao = new JTextField();
     JLabel labelEditora = new JLabel("Editora");
     JTextField textFieldEditora = new JTextField();
-    JLabel labelAnoPublicacao = new JLabel("AnoPublicacao");
+    JLabel labelAnoPublicacao = new JLabel("DataPublicacao");
     SimpleDateFormat sdfdataPublicacao = new SimpleDateFormat("dd/MM/yyyy");
     JTextField textFieldAnoPublicacao = new JTextField();
     JLabel labelQntEstoque = new JLabel("quantidadeEstoque");
     JTextField textFieldQntEstoque = new JTextField();
-    JLabel labelLivro = new JLabel("Livro");
-    JTextField textFieldLivro = new JTextField();
+    JLabel labelAutor = new JLabel("Autor");
+    JTextField textFieldAutor = new JTextField();
     JLabel labelGenero = new JLabel("Genero");
     JTextField textFieldGenero = new JTextField();
     JLabel labelStatus = new JLabel("Status");
@@ -64,7 +67,7 @@ public class LivroGUI extends JDialog {
     JPanel aviso = new JPanel();
     JLabel labelAviso = new JLabel("");
     String acao = "";//variavel para facilitar insert e update
-    DAOLivro1 daoLivro = new DAOLivro1();
+    DAOLivro daoLivro = new DAOLivro();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     DecimalFormat decimalFormat = new DecimalFormat("###,###,##0.00");
     Livro livro = new Livro();
@@ -102,7 +105,7 @@ public class LivroGUI extends JDialog {
         textFieldAnoPublicacao.setEditable(dataPublicacao);
         textFieldEdicao.setEditable(edicao);
         textFieldEditora.setEditable(editora);
-        textFieldLivro.setEditable(autor);
+        textFieldAutor.setEditable(autor);
         textFieldGenero.setEditable(genero);
         textFieldStatus.setEditable(status);
         textFieldQntEstoque.setEditable(qntEstoque);
@@ -158,8 +161,8 @@ public class LivroGUI extends JDialog {
         centro.add(textFieldNomeLivro);
         centro.add(labelAnoPublicacao);
         centro.add(textFieldAnoPublicacao);
-        centro.add(labelLivro);
-        centro.add(textFieldLivro);
+        centro.add(labelAutor);
+        centro.add(textFieldAutor);
         centro.add(labelEdicao);
         centro.add(textFieldEdicao);
         centro.add(labelEditora);
@@ -181,107 +184,106 @@ public class LivroGUI extends JDialog {
         labelAviso.setText("Digite uma placa e clic [Pesquisar]");
 
         // Listeners
+//        btnRetrieve.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                Livro livro = new Livro();
+//                textFieldIdLivro.setText(textFieldIdLivro.getText().trim());//caso tenham sido digitados espaços
+//                DAOLivro1 daoLivro = new DAOLivro1();
+//                if (textFieldIdLivro.getText().equals("")) {
+//                    // DAOLivro1 daoLivro = new DAOLivro1();
+//                    List<String> listaAuxiliar = daoLivro.listInOrderNomeStrings("id");
+//                    if (listaAuxiliar.size() > 0) {
+//                        Point lc = btnRetrieve.getLocationOnScreen();
+//                        lc.x = lc.x + btnRetrieve.getWidth();
+//                        String selectedItem = new myUtil.JanelaPesquisar(listaAuxiliar,
+//                                lc.x,
+//                                lc.y).getValorRetornado();
+//                        if (!selectedItem.equals("")) {
+//                            String[] aux = selectedItem.split("-");
+//                            textFieldIdLivro.setText(aux[0]);
+//                            textFieldAnoPublicacao.setText(aux[2]);
+//                            btnRetrieve.doClick();
+//                        } else {
+//                            textFieldIdLivro.requestFocus();
+//                            textFieldIdLivro.selectAll();
+//                        }
+//                    }
+//
+//                    textFieldIdLivro.requestFocus();
+//                    textFieldIdLivro.selectAll();
+//                } else {
+//                    try {
+//                        livro = new Livro();
+//                        livro.setId(Integer.valueOf(textFieldIdLivro.getText()));
+//                        daoLivro = new DAOLivro1();
+////                         = daoLivro.obter(livro);
+//
+//                        if (livro != null) { //se encontrou na lista                            
+//                            textFieldNomeLivro.setText(String.valueOf(livro.getNome()));
+//                            atvBotoes(false, true, true, true);
+//                            habilitarAtributos(true, false, false, false, false, false, false, false, false);
+//                            labelAviso.setText("Encontrou - clic [Pesquisar], [Alterar] ou [Excluir]");
+//                            acao = "encontrou";
+//                        } else {  //não achou na lista
+//                            atvBotoes(true, false, false, false);
+//                            zerarAtributos();
+//                            labelAviso.setText("Não cadastrado - clic [Inserir] ou digite outra id [Pesquisar]");
+//                        }
+//                        textFieldIdLivro.setBackground(Color.green);
+//                        textFieldAnoPublicacao.setBackground(Color.green);
+//                    } catch (Exception x) {
+//                        textFieldIdLivro.setOpaque(true);
+//                        textFieldIdLivro.selectAll();
+//                        textFieldIdLivro.requestFocus();
+//                        textFieldIdLivro.setBackground(Color.red);
+//                        textFieldAnoPublicacao.setBackground(Color.red);
+//                        labelAviso.setText("Tipo errado - " + x.getMessage());
+//                    }
+//                }
+//            }
+//        });
         btnRetrieve.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Livro livro = new Livro();
-                textFieldIdLivro.setText(textFieldIdLivro.getText().trim());//caso tenham sido digitados espaços
-                DAOLivro1 daoLivro = new DAOLivro1();
-                if (textFieldIdLivro.getText().equals("")) {
-                    // DAOLivro1 daoLivro = new DAOLivro1();
-                    List<String> listaAuxiliar = daoLivro.listInOrderNomeStrings("id");
-                    if (listaAuxiliar.size() > 0) {
-                        Point lc = btnRetrieve.getLocationOnScreen();
-                        lc.x = lc.x + btnRetrieve.getWidth();
-                        String selectedItem = new myUtil.JanelaPesquisar(listaAuxiliar,
-                                lc.x,
-                                lc.y).getValorRetornado();
-                        if (!selectedItem.equals("")) {
-                            String[] aux = selectedItem.split("-");
-                            textFieldIdLivro.setText(aux[0]);
-                            textFieldAnoPublicacao.setText(aux[2]);
-                            btnRetrieve.doClick();
-                        } else {
+                try {
+                    textFieldIdLivro.setText(textFieldIdLivro.getText().trim());//caso tenham sido digitados espaços
+                    if (textFieldIdLivro.getText().equals("")) {
+                        MinhaJOptionPane myJOptionPane
+                                = new MinhaJOptionPane(
+                                        new Point(getBounds().x + (int) (getBounds().getWidth() / 2),
+                                                getBounds().y + (int) (getBounds().getHeight() / 2)),
+                                        "Deve ser informado um valor para esse campo");
+                        if (myJOptionPane.getValorRetornado()) {
                             textFieldIdLivro.requestFocus();
                             textFieldIdLivro.selectAll();
                         }
-                    }
-
-                    textFieldIdLivro.requestFocus();
-                    textFieldIdLivro.selectAll();
-                } else {
-                    try {
+                    } else {
                         livro = new Livro();
                         livro.setId(Integer.valueOf(textFieldIdLivro.getText()));
-                        livro.setAnoPublicacao(sdf.parse(textFieldAnoPublicacao.getText()));
-                        daoLivro = new DAOLivro1();
-//                         = daoLivro.obter(livro);
+                        livro = daoLivro.obter(livro.getId());
+                        if (livro != null) { //se encontrou na lista
 
-                        if (livro != null) { //se encontrou na lista                            
                             textFieldNomeLivro.setText(String.valueOf(livro.getNome()));
+                            textFieldAnoPublicacao.setText(sdfdataPublicacao.format(livro.getAnoPublicacao()));
                             atvBotoes(false, true, true, true);
                             habilitarAtributos(true, false, false, false, false, false, false, false, false);
                             labelAviso.setText("Encontrou - clic [Pesquisar], [Alterar] ou [Excluir]");
                             acao = "encontrou";
-                        } else {  //não achou na lista
+                        } else {
                             atvBotoes(true, true, false, false);
                             zerarAtributos();
-                            labelAviso.setText("Não cadastrado - clic [Inserir] ou digite outra id [Pesquisar]");
+                            labelAviso.setText("Não cadastrado - clic [Inserir] ou digite outra placa [Pesquisar]");
                         }
-                        textFieldIdLivro.setBackground(Color.green);
-                        textFieldAnoPublicacao.setBackground(Color.green);
-                    } catch (Exception x) {
-                        textFieldIdLivro.setOpaque(true);
-                        textFieldIdLivro.selectAll();
-                        textFieldIdLivro.requestFocus();
-                        textFieldIdLivro.setBackground(Color.red);
-                        textFieldAnoPublicacao.setBackground(Color.red);
-                        labelAviso.setText("Tipo errado - " + x.getMessage());
                     }
+                } catch (Exception err) {
+                    System.out.println(err);
+                    labelAviso.setText("Erro nos dados");
+                    labelAviso.setOpaque(true);
+                    labelAviso.setBackground(Color.red);
                 }
             }
         });
-//        btnRetrieve.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent ae) {
-//                try {
-//                    textFieldIdLivro.setText(textFieldIdLivro.getText().trim());//caso tenham sido digitados espaços
-//                    if (textFieldIdLivro.getText().equals("")) {
-//                        MinhaJOptionPane myJOptionPane
-//                                = new MinhaJOptionPane(
-//                                        new Point(getBounds().x + (int) (getBounds().getWidth() / 2),
-//                                                getBounds().y + (int) (getBounds().getHeight() / 2)),
-//                                        "Deve ser informado um valor para esse campo");
-//                        if (myJOptionPane.getValorRetornado()) {
-//                            textFieldIdLivro.requestFocus();
-//                            textFieldIdLivro.selectAll();
-//                        }
-//                    } else {
-//                        livro = new Livro();
-//                        livro.setId(Integer.valueOf(textFieldIdLivro.getText()));
-//                        livro = daoLivro.obter(livro.getId());
-//                        if (livro != null) { //se encontrou na lista
-//
-//                            textFieldNomeLivro.setText(String.valueOf(livro.getNome()));
-//                            textFieldAnoPublicacao.setText(sdfdataPublicacao.format(livro.getAnoPublicacao()));
-//                            atvBotoes(false, true, true, true);
-//                            habilitarAtributos(true, false, false);
-//                            labelAviso.setText("Encontrou - clic [Pesquisar], [Alterar] ou [Excluir]");
-//                            acao = "encontrou";
-//                        } else {
-//                            atvBotoes(true, true, false, false);
-//                            zerarAtributos();
-//                            labelAviso.setText("Não cadastrado - clic [Inserir] ou digite outra placa [Pesquisar]");
-//                        }
-//                    }
-//                } catch (Exception err) {
-//                    System.out.println(err);
-//                    labelAviso.setText("Erro nos dados");
-//                    labelAviso.setOpaque(true);
-//                    labelAviso.setBackground(Color.red);
-//                }
-//            }
-//        });
         btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -324,6 +326,8 @@ public class LivroGUI extends JDialog {
                     livroNovo.setId(Integer.valueOf(textFieldIdLivro.getText()));
                     livroNovo.setNome(String.valueOf(textFieldNomeLivro.getText()));
                     livroNovo.setAnoPublicacao(sdfdataPublicacao.parse(textFieldAnoPublicacao.getText()));
+                    livroNovo.setEdicao(String.valueOf(textFieldEdicao.getText()));
+                    livroNovo.setQntEstoque(Integer.valueOf(textFieldEdicao.getText()));
                     if (acao.equals("insert")) {
                         daoLivro.inserir(livroNovo);
                         labelAviso.setText("Registro inserido...");
@@ -368,8 +372,8 @@ public class LivroGUI extends JDialog {
             public void actionPerformed(ActionEvent ae) {
                 List<String> listaAuxiliar = new DAOEditora().listInOrderNomeStrings("id");
                     if (listaAuxiliar.size() > 0) {
-                        Point lc = btnRetrieve.getLocationOnScreen();
-                        lc.x = lc.x + btnRetrieve.getWidth();
+                        Point lc = textFieldEditora.getLocationOnScreen();
+                        lc.x = lc.x + textFieldEditora.getWidth();
                         String selectedItem = new myUtil.JanelaPesquisar(listaAuxiliar,
                                 lc.x,
                                 lc.y).getValorRetornado();
@@ -381,31 +385,30 @@ public class LivroGUI extends JDialog {
             }
         });
         
-        textFieldLivro.addActionListener(new ActionListener() {
+        textFieldAutor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                List<String> listaAuxiliar = new DAOLivro().listInOrderNomeStrings("id");
+                List<String> listaAuxiliar = new DAOAutor().listInOrderNomeStrings("id");
                     if (listaAuxiliar.size() > 0) {
-                        Point lc = btnRetrieve.getLocationOnScreen();
-                        lc.x = lc.x + btnRetrieve.getWidth();
+                        Point lc = textFieldAutor.getLocationOnScreen();
+                        lc.x = lc.x + textFieldAutor.getWidth();
                         String selectedItem = new myUtil.JanelaPesquisar(listaAuxiliar,
                                 lc.x,
                                 lc.y).getValorRetornado();
                         if (!selectedItem.equals("")) {
                             String[] aux = selectedItem.split("-");
-                            textFieldLivro.setText(aux[0]);
+                            textFieldAutor.setText(aux[0]);
                         } 
                     }
-                }
-        });
-        
+            }
+        });        
         textFieldGenero.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                  List<String> listaAuxiliar = new DAOGenero().listInOrderNomeStrings("id");
+                List<String> listaAuxiliar = new DAOGenero().listInOrderNomeStrings("id");
                     if (listaAuxiliar.size() > 0) {
-                        Point lc = btnRetrieve.getLocationOnScreen();
-                        lc.x = lc.x + btnRetrieve.getWidth();
+                        Point lc = textFieldGenero.getLocationOnScreen();
+                        lc.x = lc.x + textFieldGenero.getWidth();
                         String selectedItem = new myUtil.JanelaPesquisar(listaAuxiliar,
                                 lc.x,
                                 lc.y).getValorRetornado();
@@ -413,7 +416,7 @@ public class LivroGUI extends JDialog {
                             String[] aux = selectedItem.split("-");
                             textFieldGenero.setText(aux[0]);
                         } 
-                    } 
+                    }
             }
         });
         
@@ -457,7 +460,18 @@ public class LivroGUI extends JDialog {
         textFieldStatus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
+                List<String> listaAuxiliar = new DAOStatus().listInOrderNomeStrings("id");
+                    if (listaAuxiliar.size() > 0) {
+                        Point lc = textFieldStatus.getLocationOnScreen();
+                        lc.x = lc.x + textFieldStatus.getWidth();
+                        String selectedItem = new myUtil.JanelaPesquisar(listaAuxiliar,
+                                lc.x,
+                                lc.y).getValorRetornado();
+                        if (!selectedItem.equals("")) {
+                            String[] aux = selectedItem.split("-");
+                            textFieldStatus.setText(aux[0]);
+                        } 
+                    }
             }
         });
         

@@ -1,5 +1,6 @@
 package GUIs;
 
+import GUIs.GUIListagem.StatusGUIListagem;
 import DAOs.DAOStatus;
 import Entidades.Status;
 import tools.MinhaJOptionPane;

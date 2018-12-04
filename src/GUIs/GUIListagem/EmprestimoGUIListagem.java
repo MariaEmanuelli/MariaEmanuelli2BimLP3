@@ -1,7 +1,6 @@
-package GUIs;
+package GUIs.GUIListagem;
 
-import DAOs.DAOEditora;
-import Entidades.Editora;
+import Entidades.Emprestimo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -12,31 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 
-public class EditoraGUIListagem extends JDialog {
+// @author Radames
+public class EmprestimoGUIListagem extends JDialog {
 
-    List<Editora> texto;
     JPanel painelTa = new JPanel();
     ScrollPane scroll = new ScrollPane();
     JTextArea ta = new JTextArea();
-    int posX;
-    int posY;
 
-    public EditoraGUIListagem(List<Editora> texto, int posX, int posY) {
-        this.texto = texto;
-        this.posX = posX;
-        this.posY = posY;
-        inicializar();
-    }
-
-    public EditoraGUIListagem(int posX, int posY) {
-        this.posX = posX;
-        this.posY = posY;
-        inicializar();
-    }
-
-    private void inicializar() {
-        List<Editora> texto = new DAOEditora().list();
-        setTitle("Listagem de Editora");
+    public EmprestimoGUIListagem(List<Emprestimo> texto, int posX, int posY) {
+        setTitle("Listagem de Emprestimo");
         setSize(500, 180);//tamanho da janela
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);//libera ao sair (tira da memória a classe
         setLayout(new BorderLayout());//informa qual gerenciador de layout será usado
@@ -61,3 +44,4 @@ public class EditoraGUIListagem extends JDialog {
         setVisible(true);//faz a janela ficar visível        
     }
 }
+

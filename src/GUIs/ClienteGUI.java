@@ -1,5 +1,6 @@
 package GUIs;
 
+import GUIs.GUIListagem.ClienteGUIListagem;
 import DAOs.DAOCliente;
 import Entidades.Cliente;
 import tools.MinhaJOptionPane;

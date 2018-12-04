@@ -1,5 +1,6 @@
 package GUIs;
 
+import GUIs.GUIListagem.EditoraGUIListagem;
 import DAOs.DAOEditora;
 import Entidades.Editora;
 import tools.MinhaJOptionPane;
