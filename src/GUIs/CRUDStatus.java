@@ -44,7 +44,7 @@ public class CRUDStatus extends JDialog {
     JLabel labelId = new JLabel("Id");
     JTextField textFieldId = new JTextField(0);
     JLabel labelNome = new JLabel("Nome");
-    JTextField textFieldNome = new JTextField(0);
+    JTextField textFieldNome = new JTextField(40);
 
     JPanel aviso = new JPanel();
     JLabel labelAviso = new JLabel("");
@@ -87,8 +87,13 @@ public class CRUDStatus extends JDialog {
 
     }
 
+    public void zerarAtributos2() {
+        textFieldNome.setText("");
+
+    }
+
     public CRUDStatus() {
-        setTitle("Cadastrar um status");
+        setTitle("STATUS");
         setSize(600, 400);//tamanho da janela
         setLayout(new BorderLayout());//informa qual gerenciador de layout será usado
         setBackground(Color.CYAN);//cor do fundo da janela
@@ -116,11 +121,12 @@ public class CRUDStatus extends JDialog {
         btnSave.setVisible(false);
         btnCancel.setVisible(false);  //atributos
         JPanel centro = new JPanel();
-        centro.setLayout(new GridLayout(2, 2));
+        centro.setLayout(new GridLayout(3, 2));
         centro.add(labelId);
         centro.add(textFieldId);
         centro.add(labelNome);
         centro.add(textFieldNome);
+
         aviso.add(labelAviso);
         aviso.setBackground(Color.yellow);
         cp.add(Toolbar1, BorderLayout.NORTH);
@@ -148,6 +154,7 @@ public class CRUDStatus extends JDialog {
                     status = cl.obter(status.getIdStatus());
                     if (status != null) { //se encontrou na lista
                         textFieldNome.setText(status.getNomeStatus());
+
                         atvBotoes(false, true, true, true);
                         habilitarAtributos(true, false);
                         labelAviso.setText("Encontrou - clic [Pesquisar], [Alterar] ou [Excluir]");
@@ -155,14 +162,18 @@ public class CRUDStatus extends JDialog {
                         statusOriginal = status;
                     } else {
                         atvBotoes(true, true, false, false);
+                        zerarAtributos2();
+
                         labelAviso.setText("Não cadastrado - clic [Inserir] ou digite outra id [Pesquisar]");
                     }
                 }
             }
         });
+
         btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+
                 habilitarAtributos(false, true);
                 textFieldNome.requestFocus();
                 mostrarBotoes(false);
@@ -177,6 +188,7 @@ public class CRUDStatus extends JDialog {
                     status = new Status();
                     status.setIdStatus(Integer.valueOf(textFieldId.getText()));
                     status.setNomeStatus(textFieldNome.getText());
+
                     cl.inserir(status);
                     habilitarAtributos(true, false);
                     zerarAtributos();
@@ -186,6 +198,7 @@ public class CRUDStatus extends JDialog {
                 } else {  //acao = update
                     status.setIdStatus(Integer.valueOf(textFieldId.getText()));
                     status.setNomeStatus(textFieldNome.getText());
+
                     cl.atualizar(status);
                     mostrarBotoes(true);
                     habilitarAtributos(true, false);
@@ -207,6 +220,7 @@ public class CRUDStatus extends JDialog {
         btnList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+
                 acao = "list";
                 ListagemStatus guiListagem = new ListagemStatus(cl.list());
             }
@@ -281,6 +295,7 @@ public class CRUDStatus extends JDialog {
             }
         });
         setModal(true);
+
         setVisible(true);//faz a janela ficar visível  
     }
 

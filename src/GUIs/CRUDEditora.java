@@ -170,7 +170,7 @@ public class CRUDEditora extends JDialog {
         btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                habilitarAtributos(false, true, false);
+                habilitarAtributos(false, true, true);
                 textFieldNome.requestFocus();
                 mostrarBotoes(false);
                 labelAviso.setText("Preencha os campos e clic [Salvar] ou clic [Cancelar]");

@@ -47,7 +47,7 @@ public class CRUDAutor extends JDialog {
     JTextField textFieldId = new JTextField(0);
     JLabel labelNome = new JLabel("Nome");
     JTextField textFieldNome = new JTextField(0);
-    JLabel labelDataNascimento = new JLabel("CNPJ");
+    JLabel labelDataNascimento = new JLabel("Data de Nascimento (dd/MM/yyyy)");
     JTextField textFieldDataNascimento = new JTextField(0);
 
     JPanel aviso = new JPanel();
@@ -96,7 +96,7 @@ public class CRUDAutor extends JDialog {
     }
 
     public CRUDAutor() {
-        setTitle("Cadastrar um editora");
+        setTitle("Cadastrar um autor");
         setSize(600, 400);//tamanho da janela
         setLayout(new BorderLayout());//informa qual gerenciador de layout será usado
         setBackground(Color.CYAN);//cor do fundo da janela
@@ -174,7 +174,7 @@ public class CRUDAutor extends JDialog {
         btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                habilitarAtributos(false, true, false);
+                habilitarAtributos(false, true, true);
                 textFieldNome.requestFocus();
                 mostrarBotoes(false);
                 labelAviso.setText("Preencha os campos e clic [Salvar] ou clic [Cancelar]");

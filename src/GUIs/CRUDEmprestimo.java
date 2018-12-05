@@ -51,7 +51,7 @@ public class CRUDEmprestimo extends JDialog {
     JTextField textFieldId = new JTextField(0);
     JLabel labelData = new JLabel("Data de retirada");
     JTextField textFieldData = new JTextField(40);
-    JLabel labelCliente = new JLabel("Id oa cliente");
+    JLabel labelCliente = new JLabel("Id do cliente");
     JTextField textFieldCliente = new JTextField(0);
 
     JPanel aviso = new JPanel();

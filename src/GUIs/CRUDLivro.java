@@ -500,7 +500,7 @@ public class CRUDLivro extends JDialog {
         textFieldGenero.addFocusListener(new FocusListener() { //ao receber o foco, fica verde
             @Override
             public void focusGained(FocusEvent fe) {
-                textFieldGenero.setBackground(Color.GREEN);
+                textFieldGenero.setBackground(Color.orange);
             }
 
             @Override
@@ -511,7 +511,7 @@ public class CRUDLivro extends JDialog {
         textFieldEditora.addFocusListener(new FocusListener() { //ao receber o foco, fica verde
             @Override
             public void focusGained(FocusEvent fe) {
-                textFieldEditora.setBackground(Color.GREEN);
+                textFieldEditora.setBackground(Color.orange);
             }
 
             @Override
@@ -522,7 +522,7 @@ public class CRUDLivro extends JDialog {
         textFieldAutor.addFocusListener(new FocusListener() { //ao receber o foco, fica verde
             @Override
             public void focusGained(FocusEvent fe) {
-                textFieldAutor.setBackground(Color.GREEN);
+                textFieldAutor.setBackground(Color.orange);
             }
 
             @Override
@@ -533,7 +533,7 @@ public class CRUDLivro extends JDialog {
         textFieldStatus.addFocusListener(new FocusListener() { //ao receber o foco, fica verde
             @Override
             public void focusGained(FocusEvent fe) {
-                textFieldStatus.setBackground(Color.GREEN);
+                textFieldStatus.setBackground(Color.orange);
             }
 
             @Override

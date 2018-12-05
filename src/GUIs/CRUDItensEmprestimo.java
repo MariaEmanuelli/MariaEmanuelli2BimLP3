@@ -1,5 +1,6 @@
 package GUIs;
 
+import DAOs.DAOEmprestimo;
 import DAOs.DAOLivro;
 import DAOs.DAOItensEmprestimo;
 import Entidades.Livro;
@@ -63,6 +64,7 @@ public class CRUDItensEmprestimo extends JDialog {
     ItensEmprestimo emprestimo;
     ItensEmprestimo emprestimoOriginal;
 
+    DAOEmprestimo daoEmprestimo = new DAOEmprestimo();
     DAOLivro daoLivro = new DAOLivro();
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -133,13 +135,15 @@ public class CRUDItensEmprestimo extends JDialog {
         btnSave.setVisible(false);
         btnCancel.setVisible(false);  //atributos
         JPanel centro = new JPanel();
-        centro.setLayout(new GridLayout(3, 2));
+        centro.setLayout(new GridLayout(4, 2));
         centro.add(labelId);
         centro.add(textFieldId);
         centro.add(labelDataDevolucao);
         centro.add(textFieldDataDevolucao);
         centro.add(labelLivro);
         centro.add(textFieldLivro);
+        centro.add(labelEmprestimo);
+        centro.add(textFieldEmprestimo);
         aviso.add(labelAviso);
         aviso.setBackground(Color.yellow);
         cp.add(Toolbar1, BorderLayout.NORTH);
@@ -164,6 +168,22 @@ public class CRUDItensEmprestimo extends JDialog {
                             lc.y).getValorRetornado();
                     if (!selectedItem.equals("")) {
                         textFieldLivro.setText(selectedItem);
+                    }
+                }
+            }
+        });
+        textFieldEmprestimo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<String> listaAuxiliar = daoEmprestimo.listInOrderNomeStrings("id");
+                if (listaAuxiliar.size() > 0) {
+                    Point lc = textFieldEmprestimo.getLocationOnScreen();
+                    lc.x = lc.x + textFieldEmprestimo.getWidth();
+                    String selectedItem = new JanelaPesquisar(listaAuxiliar,
+                            lc.x,
+                            lc.y).getValorRetornado();
+                    if (!selectedItem.equals("")) {
+                        textFieldEmprestimo.setText(selectedItem);
                     }
                 }
             }
@@ -337,6 +357,17 @@ public class CRUDItensEmprestimo extends JDialog {
             @Override
             public void focusLost(FocusEvent e) {
                 textFieldLivro.setBackground(Color.white);
+            }
+        });
+        textFieldEmprestimo.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                textFieldEmprestimo.setBackground(Color.ORANGE);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                textFieldEmprestimo.setBackground(Color.white);
             }
         });
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE); //antes de sair do sistema, grava os dados da lista em disco
