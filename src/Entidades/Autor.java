@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author alexa
  */
 @Entity
 @Table(name = "autor")
@@ -35,11 +35,13 @@ public class Autor implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_autor")
     private Integer idAutor;
+    @Basic(optional = false)
     @Column(name = "nome_autor")
     private String nomeAutor;
-    @Column(name = "data_nascimento")
+    @Basic(optional = false)
+    @Column(name = "data_nascimento_autor")
     @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+    private Date dataNascimentoAutor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "autorIdAutor")
     private List<Livro> livroList;
 
@@ -48,6 +50,12 @@ public class Autor implements Serializable {
 
     public Autor(Integer idAutor) {
         this.idAutor = idAutor;
+    }
+
+    public Autor(Integer idAutor, String nomeAutor, Date dataNascimentoAutor) {
+        this.idAutor = idAutor;
+        this.nomeAutor = nomeAutor;
+        this.dataNascimentoAutor = dataNascimentoAutor;
     }
 
     public Integer getIdAutor() {
@@ -66,12 +74,12 @@ public class Autor implements Serializable {
         this.nomeAutor = nomeAutor;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
+    public Date getDataNascimentoAutor() {
+        return dataNascimentoAutor;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setDataNascimentoAutor(Date dataNascimentoAutor) {
+        this.dataNascimentoAutor = dataNascimentoAutor;
     }
 
     public List<Livro> getLivroList() {

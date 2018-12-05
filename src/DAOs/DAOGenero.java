@@ -49,13 +49,4 @@ public class DAOGenero extends DAOGenerico<Genero> {
         }
         return ls;
     }
-
-    public static void main(String[] args) {
-        DAOGenero daoGenero = new DAOGenero();
-        List<Genero> listaGenero = daoGenero.list();
-        for (Genero nomeGenero : listaGenero) {
-            System.out.println(nomeGenero.getNomeGenero() + "-" + nomeGenero.getNomeGenero());
-        }
-    }
 }
-///////// ***LEMBRAR DE ALTERAR AQUI, SE PRECISAR*** /////////

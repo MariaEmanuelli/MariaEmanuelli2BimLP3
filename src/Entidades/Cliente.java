@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author alexa
  */
 @Entity
 @Table(name = "cliente")
@@ -30,94 +30,112 @@ public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Column(name = "nome")
-    private String nome;
-    @Column(name = "endereco")
-    private String endereco;
-    @Column(name = "cpf")
-    private String cpf;
-    @Column(name = "telefone")
-    private String telefone;
-    @Column(name = "celular")
-    private String celular;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "senha")
-    private String senha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
+    @Column(name = "id_cliente")
+    private Integer idCliente;
+    @Basic(optional = false)
+    @Column(name = "nome_cliente")
+    private String nomeCliente;
+    @Basic(optional = false)
+    @Column(name = "endereco_cliente")
+    private String enderecoCliente;
+    @Basic(optional = false)
+    @Column(name = "cpf_cliente")
+    private String cpfCliente;
+    @Basic(optional = false)
+    @Column(name = "telefone_cliente")
+    private String telefoneCliente;
+    @Basic(optional = false)
+    @Column(name = "celular_cliente")
+    private String celularCliente;
+    @Basic(optional = false)
+    @Column(name = "email_cliente")
+    private String emailCliente;
+    @Basic(optional = false)
+    @Column(name = "senha_cliente")
+    private String senhaCliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteIdCliente")
     private List<Emprestimo> emprestimoList;
 
     public Cliente() {
     }
 
-    public Cliente(Integer id) {
-        this.id = id;
+    public Cliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public Integer getId() {
-        return id;
+    public Cliente(Integer idCliente, String nomeCliente, String enderecoCliente, String cpfCliente, String telefoneCliente, String celularCliente, String emailCliente, String senhaCliente) {
+        this.idCliente = idCliente;
+        this.nomeCliente = nomeCliente;
+        this.enderecoCliente = enderecoCliente;
+        this.cpfCliente = cpfCliente;
+        this.telefoneCliente = telefoneCliente;
+        this.celularCliente = celularCliente;
+        this.emailCliente = emailCliente;
+        this.senhaCliente = senhaCliente;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getIdCliente() {
+        return idCliente;
     }
 
-    public String getNome() {
-        return nome;
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getNomeCliente() {
+        return nomeCliente;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public String getEnderecoCliente() {
+        return enderecoCliente;
     }
 
-    public String getCpf() {
-        return cpf;
+    public void setEnderecoCliente(String enderecoCliente) {
+        this.enderecoCliente = enderecoCliente;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public String getCpfCliente() {
+        return cpfCliente;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public String getTelefoneCliente() {
+        return telefoneCliente;
     }
 
-    public String getCelular() {
-        return celular;
+    public void setTelefoneCliente(String telefoneCliente) {
+        this.telefoneCliente = telefoneCliente;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public String getCelularCliente() {
+        return celularCliente;
     }
 
-    public String getEmail() {
-        return email;
+    public void setCelularCliente(String celularCliente) {
+        this.celularCliente = celularCliente;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getEmailCliente() {
+        return emailCliente;
     }
 
-    public String getSenha() {
-        return senha;
+    public void setEmailCliente(String emailCliente) {
+        this.emailCliente = emailCliente;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public String getSenhaCliente() {
+        return senhaCliente;
+    }
+
+    public void setSenhaCliente(String senhaCliente) {
+        this.senhaCliente = senhaCliente;
     }
 
     public List<Emprestimo> getEmprestimoList() {
@@ -131,7 +149,7 @@ public class Cliente implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idCliente != null ? idCliente.hashCode() : 0);
         return hash;
     }
 
@@ -142,7 +160,7 @@ public class Cliente implements Serializable {
             return false;
         }
         Cliente other = (Cliente) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idCliente == null && other.idCliente != null) || (this.idCliente != null && !this.idCliente.equals(other.idCliente))) {
             return false;
         }
         return true;
@@ -150,7 +168,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Cliente[ id=" + id + " ]";
+        return "Entidades.Cliente[ idCliente=" + idCliente + " ]";
     }
     
 }

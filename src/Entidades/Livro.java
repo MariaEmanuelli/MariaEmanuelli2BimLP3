@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author alexa
  */
 @Entity
 @Table(name = "livro")
@@ -35,17 +35,21 @@ public class Livro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Column(name = "nome")
-    private String nome;
-    @Column(name = "edicao")
-    private String edicao;
-    @Column(name = "ano_publicacao")
+    @Column(name = "id_livro")
+    private Integer idLivro;
+    @Basic(optional = false)
+    @Column(name = "nome_livro")
+    private String nomeLivro;
+    @Basic(optional = false)
+    @Column(name = "edicao_livro")
+    private String edicaoLivro;
+    @Basic(optional = false)
+    @Column(name = "ano_publicacao_livro")
     @Temporal(TemporalType.DATE)
-    private Date anoPublicacao;
-    @Column(name = "qnt_estoque")
-    private Integer qntEstoque;
+    private Date anoPublicacaoLivro;
+    @Basic(optional = false)
+    @Column(name = "quantidade_estoque_livro")
+    private int quantidadeEstoqueLivro;
     @JoinColumn(name = "autor_id_autor", referencedColumnName = "id_autor")
     @ManyToOne(optional = false)
     private Autor autorIdAutor;
@@ -58,54 +62,62 @@ public class Livro implements Serializable {
     @JoinColumn(name = "status_id_status", referencedColumnName = "id_status")
     @ManyToOne(optional = false)
     private Status statusIdStatus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livroIdLivro")
     private List<ItensEmprestimo> itensEmprestimoList;
 
     public Livro() {
     }
 
-    public Livro(Integer id) {
-        this.id = id;
+    public Livro(Integer idLivro) {
+        this.idLivro = idLivro;
     }
 
-    public Integer getId() {
-        return id;
+    public Livro(Integer idLivro, String nomeLivro, String edicaoLivro, Date anoPublicacaoLivro, int quantidadeEstoqueLivro) {
+        this.idLivro = idLivro;
+        this.nomeLivro = nomeLivro;
+        this.edicaoLivro = edicaoLivro;
+        this.anoPublicacaoLivro = anoPublicacaoLivro;
+        this.quantidadeEstoqueLivro = quantidadeEstoqueLivro;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getIdLivro() {
+        return idLivro;
     }
 
-    public String getNome() {
-        return nome;
+    public void setIdLivro(Integer idLivro) {
+        this.idLivro = idLivro;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getNomeLivro() {
+        return nomeLivro;
     }
 
-    public String getEdicao() {
-        return edicao;
+    public void setNomeLivro(String nomeLivro) {
+        this.nomeLivro = nomeLivro;
     }
 
-    public void setEdicao(String edicao) {
-        this.edicao = edicao;
+    public String getEdicaoLivro() {
+        return edicaoLivro;
     }
 
-    public Date getAnoPublicacao() {
-        return anoPublicacao;
+    public void setEdicaoLivro(String edicaoLivro) {
+        this.edicaoLivro = edicaoLivro;
     }
 
-    public void setAnoPublicacao(Date anoPublicacao) {
-        this.anoPublicacao = anoPublicacao;
+    public Date getAnoPublicacaoLivro() {
+        return anoPublicacaoLivro;
     }
 
-    public Integer getQntEstoque() {
-        return qntEstoque;
+    public void setAnoPublicacaoLivro(Date anoPublicacaoLivro) {
+        this.anoPublicacaoLivro = anoPublicacaoLivro;
     }
 
-    public void setQntEstoque(Integer qntEstoque) {
-        this.qntEstoque = qntEstoque;
+    public int getQuantidadeEstoqueLivro() {
+        return quantidadeEstoqueLivro;
+    }
+
+    public void setQuantidadeEstoqueLivro(int quantidadeEstoqueLivro) {
+        this.quantidadeEstoqueLivro = quantidadeEstoqueLivro;
     }
 
     public Autor getAutorIdAutor() {
@@ -151,7 +163,7 @@ public class Livro implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idLivro != null ? idLivro.hashCode() : 0);
         return hash;
     }
 
@@ -162,7 +174,7 @@ public class Livro implements Serializable {
             return false;
         }
         Livro other = (Livro) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idLivro == null && other.idLivro != null) || (this.idLivro != null && !this.idLivro.equals(other.idLivro))) {
             return false;
         }
         return true;
@@ -170,7 +182,7 @@ public class Livro implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Livro[ id=" + id + " ]";
+        return "Entidades.Livro[ idLivro=" + idLivro + " ]";
     }
     
 }

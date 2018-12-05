@@ -1,32 +1,21 @@
 package Main;
 
-//import CrudTeste.TesteGUI;
-//import CrudGenero.GeneroGUI;
-import DAOs.DAOCliente;
-import GUIs.AutorGUI;
-import GUIs.GUIListagem.AutorGUIListagem;
-import GUIs.ClienteGUI;
-import GUIs.EditoraGUI;
-import GUIs.EmprestimoGUI;
-import GUIs.GUIListagem.EditoraGUIListagem;
-import GUIs.GeneroGUI;
-import GUIs.LivroGUI;
-import GUIs.StatusGUI;
+import GUIs.CRUDAutor;
+import GUIs.CRUDCliente;
+import GUIs.CRUDEditora;
+import GUIs.CRUDEmprestimo;
+import GUIs.CRUDEndereco;
+import GUIs.CRUDGenero;
+import GUIs.CRUDItensEmprestimo;
+import GUIs.CRUDLivro;
+import GUIs.CRUDStatus;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -34,352 +23,128 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.UndoableEditListener;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.Element;
-import javax.swing.text.Position;
-import javax.swing.text.Segment;
+//import myUtil.CentroDoMonitorMaior;
 
 public class MenuPrincipal extends JFrame {
-    
-    Container cp;
-    JPanel pnNorte = new JPanel();
-    JPanel pnCentro = new JPanel();
-    JLabel lbTitulo = new JLabel("Biblioteca Municipal");
-    
-    Font fonte = new Font("Monotype Corsiva", Font.BOLD, 30);
-    
-    JLabel labelComImagemDeTamanhoDiferente = new JLabel();
-    
-    JMenuBar menuBar = new JMenuBar();
-    JMenu menuCadastros = new JMenu("Cadastros");
-    JMenu menuListas = new JMenu("Listas");
-    JMenuItem cadLivro = new JMenuItem("Livro");
-    JMenuItem listLivro = new JMenuItem("Livro");
-    JMenuItem cadEditora = new JMenuItem("Editora");
-    JMenuItem listEditora = new JMenuItem("Editora");
-    JMenuItem cadAutor = new JMenuItem("Autor");
-    JMenuItem listAutor = new JMenuItem("Autor");
-    JMenuItem cadGenero = new JMenuItem("Genero");
-    JMenuItem listGenero = new JMenuItem("Genero");
-    JMenuItem cadCliente = new JMenuItem("Cliente");
-    JMenuItem listCliente = new JMenuItem("Cliente");
-    JMenuItem cadEmprestimo = new JMenuItem("Emprestimo");
-    JMenuItem listEmprestimo = new JMenuItem("Emprestimo");
-    JMenuItem cadStatus = new JMenuItem("Status");
-    JMenuItem listStatus = new JMenuItem("Status");
-    JMenu menuCompor = new JMenu("Composicoes");
-    JMenu menuDoc = new JMenu("Documentos");
 
-    JMenuItem cadItensEmprestimo = new JMenuItem("Itens emprestimo");
+    private Container cp;
+    private Point p;
+    private JPanel pnNorte = new JPanel();
+    private JPanel pnCentro = new JPanel();
+    private JLabel lbTitulo = new JLabel("Biblioteca Municipal");
+    private Font fonte = new Font("Monotype Corsiva", Font.BOLD, 30);
+    private JLabel labelComImagemDeTamanhoDiferente = new JLabel();
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu menuCadastros = new JMenu("Cadastros");
+//------------------------ Itens do Menu ----------------------------
+    private JMenuItem crudCliente = new JMenuItem("Cliente");
+    private JMenuItem crudStatus = new JMenuItem("Status");
+    private JMenuItem crudGenero = new JMenuItem("Gênero");
+    private JMenuItem crudEditora = new JMenuItem("Editora");
+    private JMenuItem crudAutor = new JMenuItem("Autor");
     
-    JMenuItem cadPDFCliente = new JMenuItem("Lista de clientes");
-    JMenuItem cadPDFLivro = new JMenuItem("Lista de filmes");
-    JMenu menuScreen = new JMenu("Posicionamento no monitor");
-    JMenuItem posicaoNaJanela = new JMenuItem("Onde está...");
-    Point p;
+    private JMenuItem crudEmprestimo = new JMenuItem("Empréstimo");
+    private JMenuItem crudLivro = new JMenuItem("Livro");
+    private JMenuItem crudEndereco = new JMenuItem("Endereço");
     
-    public MenuPrincipal(Dimension dimensao) {
+    private JMenuItem crudItensEmprestimo = new JMenuItem("Itens do Empréstimo");
+    
+    public MenuPrincipal() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(dimensao);
-        setTitle(lbTitulo.getText());
-        
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+        setTitle("Biblioteca Municipal");
+
         cp = getContentPane();
         cp.setLayout(new BorderLayout());
         pnNorte.add(lbTitulo);
         lbTitulo.setFont(fonte);
         pnNorte.setBackground(Color.LIGHT_GRAY);
-
-        //para ajustar o tamanho de uma imagem
-        try {
-            ImageIcon icone = new ImageIcon(getClass().getResource("/fotos/logo.png"));
-            Image imagemAux;
-            imagemAux = icone.getImage();
-            icone.setImage(imagemAux.getScaledInstance(674, 208, Image.SCALE_FAST));
-            
-            labelComImagemDeTamanhoDiferente = new JLabel();
-            labelComImagemDeTamanhoDiferente.setIcon(icone);
-        } catch (Exception e) {
-            System.out.println("erro ao carregar a imagem");
-        }
-
-        cadLivro.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LivroGUI livroGUI = new LivroGUI(p, dimensao);
-            }
-        });
-        cadEditora.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EditoraGUI editoraGUI = new EditoraGUI(p, dimensao);
-            }
-        });
-        listEditora.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EditoraGUIListagem editoraGUIListagem = new EditoraGUIListagem(100, 200);
-            }
-        });
-        cadAutor.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AutorGUI autorGUI = new AutorGUI(p, dimensao);
-            }
-        }
-        );
-        
-        listAutor.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AutorGUIListagem autorGUIListagem = new AutorGUIListagem(100,200);
-            }
-            
-        });
-        cadCliente.addActionListener(
-                new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e
-            ) {
-                ClienteGUI clienteGUI = new ClienteGUI(p, dimensao);
-            }
-        }
-        );
-        cadEmprestimo.addActionListener(
-                new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e
-            ) {
-                EmprestimoGUI emprestimoGUI = new EmprestimoGUI(p, dimensao);
-            }
-        }
-        );
-        listEditora.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EditoraGUIListagem editoraGUIListagem = new EditoraGUIListagem(100, 200);
-            }
-        });
-        
-        cadGenero.addActionListener(
-                new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GeneroGUI generoGUI = new GeneroGUI();
-            }
-        }
-        );
-        
-        cadStatus.addActionListener(
-                new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                StatusGUI statusGUI = new StatusGUI(p, dimensao);
-            }
-        }
-        );
-
-//        DAOCliente controleCliente = new DAOCliente();
-//        cadPDFCliente.addActionListener(new ActionListener() {
-//            @Override
-//        public void actionPerformed(ActionEvent e) {
-//                Document documentoPDF = new Document() {
-//                    @Override
-//                    public int getLength() {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void addDocumentListener(DocumentListener dl) {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void removeDocumentListener(DocumentListener dl) {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void addUndoableEditListener(UndoableEditListener ul) {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void removeUndoableEditListener(UndoableEditListener ul) {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public Object getProperty(Object o) {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void putProperty(Object o, Object o1) {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void remove(int i, int i1) throws BadLocationException {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void insertString(int i, String string, AttributeSet as) throws BadLocationException {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public String getText(int i, int i1) throws BadLocationException {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void getText(int i, int i1, Segment sgmnt) throws BadLocationException {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public Position getStartPosition() {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public Position getEndPosition() {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public Position createPosition(int i) throws BadLocationException {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public Element[] getRootElements() {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public Element getDefaultRootElement() {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//
-//                    @Override
-//                    public void render(Runnable r) {
-//                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                    }
-//                };
-//
-//                try {
-//                    PdfWriter.getInstance(documentoPDF, new FileOutputStream("D:\\PDF_Cliente.pdf"));
-//                    documentoPDF.open();
-//                    documentoPDF.setPageSize(PageSize.A4);
-//                    documentoPDF.add(new Paragraph("Lista de clientes"));
-//                    for (int i = 0; i < controleCliente.listStrings().size(); i++) {
-//                        documentoPDF.add(new Paragraph(controleCliente.listStrings().get(i)));
-//                    }
-//                } catch (DocumentException de) {
-//                    de.printStackTrace();
-//                } catch (IOException ioe) {
-//                    ioe.printStackTrace();
-//                } finally {
-//                    documentoPDF.close();
-//                }
-//            }
-//        });
-//
-//        DAOLivro1 controleLivro = new DAOLivro1();
-//        cadPDFLivro.addActionListener(new ActionListener() {
-//            @Override
-//        public void actionPerformed(ActionEvent e) {
-//                Document documentoPDF = new Document();
-//
-//                try {
-//                    PdfWriter.getInstance(documentoPDF, new FileOutputStream("D:\\PDF_Livro.pdf"));
-//                    documentoPDF.open();
-//                    documentoPDF.setPageSize(PageSize.A4);
-//                    documentoPDF.add(new Paragraph("Lista de filmes"));
-//                    for (int i = 0; i < controleLivro.listStrings().size(); i++) {
-//                        documentoPDF.add(new Paragraph(controleLivro.listStrings().get(i)));
-//                    }
-//                } catch (DocumentException de) {
-//                    de.printStackTrace();
-//                } catch (IOException ioe) {
-//                    ioe.printStackTrace();
-//                } finally {
-//                    documentoPDF.close();
-//                }
-//            }
-//        });
         pnCentro.add(labelComImagemDeTamanhoDiferente);
         pnCentro.setBackground(Color.BLACK);
-        
+
         cp.add(pnNorte, BorderLayout.NORTH);
         cp.add(pnCentro, BorderLayout.CENTER);
-        
+
         setJMenuBar(menuBar);
         menuBar.add(menuCadastros);
-        menuBar.add(menuListas);
-//        menuBar.add(menuDoc);
-
-        menuCadastros.add(cadLivro);
-        menuCadastros.add(cadGenero);
-        menuCadastros.add(cadEditora);
-        menuCadastros.add(cadCliente);
-        menuCadastros.add(cadAutor);
-        menuCadastros.add(cadStatus);
-        menuCadastros.add(cadEmprestimo);
+        menuCadastros.add(crudCliente);
+        menuCadastros.add(crudStatus);
+        menuCadastros.add(crudGenero);
+        menuCadastros.add(crudEditora);
+        menuCadastros.add(crudAutor);
+        menuCadastros.add(crudEmprestimo);
+        menuCadastros.add(crudLivro);
+        menuCadastros.add(crudEndereco);
+        menuCadastros.add(crudItensEmprestimo);
         
-        menuListas.add(listAutor);
-        menuListas.add(listCliente);
-        menuListas.add(listEmprestimo);
-        menuListas.add(listEditora);
-        menuListas.add(listGenero);
-        menuListas.add(listLivro);
-        menuListas.add(listStatus);
-        
-
-//        menuDoc.add(cadPDFCliente);
-//        menuDoc.add(cadPDFLivro);
-//
-//        menuBar.add(menuCompor);
-//
-        menuCompor.add(cadItensEmprestimo);
-        menuScreen.setVisible(false); //mostrar se precisar ajustar a posicao na tela
-        menuBar.add(menuScreen);
-        
-        menuScreen.add(posicaoNaJanela);
-        
-        posicaoNaJanela.addActionListener(new ActionListener() {
-            
+        crudCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("X " + getBounds().x);
+                CRUDCliente crudCliente1 = new CRUDCliente();
             }
         });
-        
-        addWindowListener(new WindowAdapter() {
+
+        crudStatus.addActionListener(new ActionListener() {
             @Override
-            public void windowClosing(WindowEvent e) {
-                // Sai do sistema  
-                System.exit(0);
+            public void actionPerformed(ActionEvent e) {
+                CRUDStatus crudStatus1 = new CRUDStatus();
             }
         });
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
         
+        crudGenero.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CRUDGenero crudGenero1 = new CRUDGenero();
+            }
+        });
+        
+        crudEditora.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CRUDEditora crudEditora = new CRUDEditora();
+            }
+        });
+        
+        crudAutor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CRUDAutor crudAutor1 = new CRUDAutor();
+            }
+        });
+
+        crudEmprestimo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CRUDEmprestimo crudEmprestimo1 = new CRUDEmprestimo();
+            }
+        });
+
+        crudLivro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CRUDLivro crudLivro1 = new CRUDLivro();
+            }
+        });
+        
+        crudEndereco.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CRUDEndereco crudEndereco1 = new CRUDEndereco();
+            }
+        });
+        
+        crudItensEmprestimo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CRUDItensEmprestimo crudItensEmprestimo1 = new CRUDItensEmprestimo();
+            }
+        });
+        
+        setVisible(true);
+    } //fecha o contrutor
+
+    public static void main(String[] args) {
+        new MenuPrincipal();
     }
 }

@@ -1,11 +1,7 @@
 package DAOs;
 
-import DAOs.DAOGenerico;
-import static DAOs.DAOGenerico.em;
 import Entidades.Livro;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DAOLivro extends DAOGenerico<Livro> {
@@ -49,31 +45,8 @@ public class DAOLivro extends DAOGenerico<Livro> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getId() + "-" + lf.get(i).getNome());
+            ls.add(lf.get(i).getIdLivro() + "-" + lf.get(i).getNomeLivro());
         }
         return ls;
     }
-    public String converteDateString(Date data){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-        sdf.setLenient(false); 
-        String dt= null;
-        try {
-            dt=sdf.format(data);
-        } catch (Exception err) {
-            System.out.println("Erro na data!!");
-        }
-        return dt;}
-    public Date stringDate(String dt){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-        sdf.setLenient(false); 
-        Date data=null;
-        try {
-            data=sdf.parse(dt);
-        } catch (Exception e) {
-            System.out.println("Erro na data!");
-        }
-        return data;
-    }
 }
-
-    

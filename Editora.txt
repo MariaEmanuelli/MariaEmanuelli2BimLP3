@@ -1,2 +1,0 @@
-intEditora;int;a
-nomeEditora;String;a

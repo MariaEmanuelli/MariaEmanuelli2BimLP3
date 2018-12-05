@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author alexa
  */
 @Entity
 @Table(name = "itens_emprestimo")
@@ -30,19 +30,20 @@ import javax.persistence.TemporalType;
 public class ItensEmprestimo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Column(name = "data_devolucao")
-    @Temporal(TemporalType.DATE)
-    private Date dataDevolucao;
     @Id
     @Basic(optional = false)
     @Column(name = "id_itens_emprestimo")
     private Integer idItensEmprestimo;
+    @Basic(optional = false)
+    @Column(name = "data_devolucao_itens_emprestimo")
+    @Temporal(TemporalType.DATE)
+    private Date dataDevolucaoItensEmprestimo;
     @JoinColumn(name = "emprestimo_id_emprestimo", referencedColumnName = "id_emprestimo")
     @ManyToOne(optional = false)
     private Emprestimo emprestimoIdEmprestimo;
-    @JoinColumn(name = "livro_id", referencedColumnName = "id")
+    @JoinColumn(name = "livro_id_livro", referencedColumnName = "id_livro")
     @ManyToOne(optional = false)
-    private Livro livroId;
+    private Livro livroIdLivro;
 
     public ItensEmprestimo() {
     }
@@ -51,12 +52,9 @@ public class ItensEmprestimo implements Serializable {
         this.idItensEmprestimo = idItensEmprestimo;
     }
 
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
+    public ItensEmprestimo(Integer idItensEmprestimo, Date dataDevolucaoItensEmprestimo) {
+        this.idItensEmprestimo = idItensEmprestimo;
+        this.dataDevolucaoItensEmprestimo = dataDevolucaoItensEmprestimo;
     }
 
     public Integer getIdItensEmprestimo() {
@@ -67,6 +65,14 @@ public class ItensEmprestimo implements Serializable {
         this.idItensEmprestimo = idItensEmprestimo;
     }
 
+    public Date getDataDevolucaoItensEmprestimo() {
+        return dataDevolucaoItensEmprestimo;
+    }
+
+    public void setDataDevolucaoItensEmprestimo(Date dataDevolucaoItensEmprestimo) {
+        this.dataDevolucaoItensEmprestimo = dataDevolucaoItensEmprestimo;
+    }
+
     public Emprestimo getEmprestimoIdEmprestimo() {
         return emprestimoIdEmprestimo;
     }
@@ -75,12 +81,12 @@ public class ItensEmprestimo implements Serializable {
         this.emprestimoIdEmprestimo = emprestimoIdEmprestimo;
     }
 
-    public Livro getLivroId() {
-        return livroId;
+    public Livro getLivroIdLivro() {
+        return livroIdLivro;
     }
 
-    public void setLivroId(Livro livroId) {
-        this.livroId = livroId;
+    public void setLivroIdLivro(Livro livroIdLivro) {
+        this.livroIdLivro = livroIdLivro;
     }
 
     @Override

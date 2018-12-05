@@ -49,13 +49,4 @@ public class DAOStatus extends DAOGenerico<Status> {
         }
         return ls;
     }
-
-    public static void main(String[] args) {
-        DAOStatus daoStatus = new DAOStatus();
-        List<Status> listaStatus = daoStatus.list();
-        for (Status nomeStatus : listaStatus) {
-            System.out.println(nomeStatus.getNomeStatus() + "-" + nomeStatus.getNomeStatus());
-        }
-    }
 }
-///////// ***LEMBRAR DE ALTERAR AQUI, SE PRECISAR*** /////////

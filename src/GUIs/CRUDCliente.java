@@ -1,14 +1,16 @@
 package GUIs;
 
-import GUIs.GUIListagem.GeneroGUIListagem;
-import DAOs.DAOGenero;
-import Entidades.Genero;
+import DAOs.DAOCliente;
+import Entidades.Cliente;
+import static com.sun.glass.ui.Cursor.setVisible;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
@@ -23,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
 
-public class GeneroGUI extends JDialog {
+public class CRUDCliente extends JDialog {
 
     ImageIcon iconeCreate = new ImageIcon(getClass().getResource("/icones/create.png"));
     ImageIcon iconeRetrieve = new ImageIcon(getClass().getResource("/icones/retrieve.png"));
@@ -43,14 +45,26 @@ public class GeneroGUI extends JDialog {
     JLabel labelId = new JLabel("Id");
     JTextField textFieldId = new JTextField(0);
     JLabel labelNome = new JLabel("Nome");
-    JTextField textFieldNome = new JTextField(40);
+    JTextField textFieldNome = new JTextField(0);
+    JLabel labelEndereco = new JLabel("Endereço");
+    JTextField textFieldEndereco = new JTextField(0);
+    JLabel labelCpf = new JLabel("CPF");
+    JTextField textFieldCpf = new JTextField(0);
+    JLabel labelTelefone = new JLabel("Telefone");
+    JTextField textFieldTelefone = new JTextField(0);
+    JLabel labelCelular = new JLabel("Celular");
+    JTextField textFieldCelular = new JTextField(0);
+    JLabel labelEmail = new JLabel("Email");
+    JTextField textFieldEmail = new JTextField(0);
+    JLabel labelSenha = new JLabel("Senha");
+    JTextField textFieldSenha = new JTextField(0);
 
     JPanel aviso = new JPanel();
     JLabel labelAviso = new JLabel("");
     String acao = "";//variavel para facilitar insert e update
-    DAOGenero daoGenero = new DAOGenero();
-    Genero genero;
-    Genero generoOriginal;
+    DAOCliente cl = new DAOCliente();
+    Cliente cliente;
+    Cliente clienteOriginal;
 
     private void atvBotoes(boolean c, boolean r, boolean u, boolean d) {
         btnCreate.setEnabled(c);
@@ -70,7 +84,7 @@ public class GeneroGUI extends JDialog {
         btnCancel.setVisible(!visivel);
     }
 
-    private void habilitarAtributos(boolean id, boolean nome) {
+    private void habilitarAtributos(boolean id, boolean nome, boolean endereco, boolean cpf, boolean telefone, boolean celular, boolean email, boolean senha) {
         if (id) {
             textFieldId.requestFocus();
             textFieldId.selectAll();
@@ -78,28 +92,34 @@ public class GeneroGUI extends JDialog {
         textFieldId.setEnabled(id);
         textFieldId.setEditable(id);
         textFieldNome.setEditable(nome);
+        textFieldEndereco.setEditable(endereco);
+        textFieldCpf.setEditable(cpf);
+        textFieldTelefone.setEditable(telefone);
+        textFieldCelular.setEditable(celular);
+        textFieldEmail.setEditable(email);
+        textFieldSenha.setEditable(senha);
     }
 
     public void zerarAtributos() {
         textFieldId.setText("");
         textFieldNome.setText("");
+        textFieldEndereco.setText("");
+        textFieldCpf.setText("");
+        textFieldTelefone.setText("");
+        textFieldCelular.setText("");
+        textFieldSenha.setText("");
 
     }
 
-    public void zerarAtributos2() {
-        textFieldNome.setText("");
-
-    }
-
-    public GeneroGUI() {
-        setTitle("MÓDULO DO SISTEMA");
+    public CRUDCliente() {
+        setTitle("Cadastrar um cliente");
         setSize(600, 400);//tamanho da janela
         setLayout(new BorderLayout());//informa qual gerenciador de layout será usado
         setBackground(Color.CYAN);//cor do fundo da janela
         Container cp = getContentPane();//container principal, para adicionar nele os outros componentes
 
         atvBotoes(false, true, false, false);
-        habilitarAtributos(true, false);
+        habilitarAtributos(true, false, false, false, false, false, false, false);
         btnCreate.setToolTipText("Inserir novo registro");
         btnRetrieve.setToolTipText("Pesquisar por chave");
         btnUpdate.setToolTipText("Alterar");
@@ -120,12 +140,23 @@ public class GeneroGUI extends JDialog {
         btnSave.setVisible(false);
         btnCancel.setVisible(false);  //atributos
         JPanel centro = new JPanel();
-        centro.setLayout(new GridLayout(2, 2));
+        centro.setLayout(new GridLayout(8, 2));
         centro.add(labelId);
         centro.add(textFieldId);
         centro.add(labelNome);
         centro.add(textFieldNome);
-
+        centro.add(labelEndereco);
+        centro.add(textFieldEndereco);
+        centro.add(labelCpf);
+        centro.add(textFieldCpf);
+        centro.add(labelTelefone);
+        centro.add(textFieldTelefone);
+        centro.add(labelCelular);
+        centro.add(textFieldCelular);
+        centro.add(labelEmail);
+        centro.add(textFieldEmail);
+        centro.add(labelSenha);
+        centro.add(textFieldSenha);
         aviso.add(labelAviso);
         aviso.setBackground(Color.yellow);
         cp.add(Toolbar1, BorderLayout.NORTH);
@@ -138,18 +169,10 @@ public class GeneroGUI extends JDialog {
         setLocationRelativeTo(null); // posiciona no centro da tela principal
 
 // Listeners
-        btnList.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                acao = "list";
-                GeneroGUIListagem listagem = new GeneroGUIListagem(daoGenero.list(), getBounds().x, getBounds().y);
-            }
-        });
-
         btnRetrieve.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                genero = new Genero();
+                cliente = new Cliente();
                 textFieldId.setText(textFieldId.getText().trim());//caso tenham sido digitados espaços
 
                 if (textFieldId.getText().equals("")) {
@@ -157,31 +180,32 @@ public class GeneroGUI extends JDialog {
                     textFieldId.requestFocus();
                     textFieldId.selectAll();
                 } else {
-                    genero.setIdGenero(Integer.valueOf(textFieldId.getText()));
-                    genero = daoGenero.obter(genero.getIdGenero());
-                    if (genero != null) { //se encontrou na lista
-                        textFieldNome.setText(genero.getNomeGenero());
-
+                    cliente.setIdCliente(Integer.valueOf(textFieldId.getText()));
+                    cliente = cl.obter(cliente.getIdCliente());
+                    if (cliente != null) { //se encontrou na lista
+                        textFieldNome.setText(cliente.getNomeCliente());
+                        textFieldEndereco.setText(cliente.getEnderecoCliente());
+                        textFieldCpf.setText(cliente.getCpfCliente());
+                        textFieldTelefone.setText(cliente.getTelefoneCliente());
+                        textFieldCelular.setText(cliente.getCelularCliente());
+                        textFieldEmail.setText(cliente.getEmailCliente());
+                        textFieldSenha.setText(cliente.getSenhaCliente());
                         atvBotoes(false, true, true, true);
-                        habilitarAtributos(true, false);
+                        habilitarAtributos(true, false, false, false, false, false, false, false);
                         labelAviso.setText("Encontrou - clic [Pesquisar], [Alterar] ou [Excluir]");
                         acao = "encontrou";
-                        generoOriginal = genero;
+                        clienteOriginal = cliente;
                     } else {
                         atvBotoes(true, true, false, false);
-                        zerarAtributos2();
-
                         labelAviso.setText("Não cadastrado - clic [Inserir] ou digite outra id [Pesquisar]");
                     }
                 }
             }
         });
-
         btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
-                habilitarAtributos(false, true);
+                habilitarAtributos(false, true, true, true, true, true, true, true);
                 textFieldNome.requestFocus();
                 mostrarBotoes(false);
                 labelAviso.setText("Preencha os campos e clic [Salvar] ou clic [Cancelar]");
@@ -192,23 +216,33 @@ public class GeneroGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (acao.equals("insert")) {
-                    genero = new Genero();
-                    genero.setIdGenero(Integer.valueOf(textFieldId.getText()));
-                    genero.setNomeGenero(textFieldNome.getText());
-
-                    daoGenero.inserir(genero);
-                    habilitarAtributos(true, false);
+                    cliente = new Cliente();
+                    cliente.setIdCliente(Integer.valueOf(textFieldId.getText()));
+                    cliente.setNomeCliente(textFieldNome.getText());
+                    cliente.setEnderecoCliente(textFieldEndereco.getText());;
+                    cliente.setCpfCliente(textFieldCpf.getText());
+                    cliente.setTelefoneCliente(textFieldTelefone.getText());;
+                    cliente.setCelularCliente(textFieldCelular.getText());
+                    cliente.setEmailCliente(textFieldEmail.getText());
+                    cliente.setSenhaCliente(textFieldSenha.getText());
+                    cl.inserir(cliente);
+                    habilitarAtributos(true, false, false, false, false, false, false, false);
                     zerarAtributos();
                     mostrarBotoes(true);
                     atvBotoes(false, true, false, false);
                     labelAviso.setText("Registro inserido...");
                 } else {  //acao = update
-                    genero.setIdGenero(Integer.valueOf(textFieldId.getText()));
-                    genero.setNomeGenero(textFieldNome.getText());
-
-                    daoGenero.atualizar(genero);
+                    cliente.setIdCliente(Integer.valueOf(textFieldId.getText()));
+                    cliente.setNomeCliente(textFieldNome.getText());
+                    cliente.setEnderecoCliente(textFieldEndereco.getText());;
+                    cliente.setCpfCliente(textFieldCpf.getText());
+                    cliente.setTelefoneCliente(textFieldTelefone.getText());;
+                    cliente.setCelularCliente(textFieldCelular.getText());
+                    cliente.setEmailCliente(textFieldEmail.getText());
+                    cliente.setSenhaCliente(textFieldSenha.getText());
+                    cl.atualizar(cliente);
                     mostrarBotoes(true);
-                    habilitarAtributos(true, false);
+                    habilitarAtributos(true, false, false, false, false, false, false, false);
                     atvBotoes(false, true, false, false);
                     zerarAtributos();
                     labelAviso.setText("Registro atualizado...");
@@ -220,24 +254,23 @@ public class GeneroGUI extends JDialog {
             public void actionPerformed(ActionEvent ae) {
                 zerarAtributos();
                 atvBotoes(false, true, false, false);
-                habilitarAtributos(true, false);
+                habilitarAtributos(true, false, false, false, false, false, false, false);
                 mostrarBotoes(true);
             }
         });
-//        btnList.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent ae) {
-//
-//                acao = "list";
-//                GeneroGUIListagem guiListagem = new GeneroGUIListagem(cl.list());
-//            }
-//        });
+        btnList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                acao = "list";
+                ListagemCliente guiListagem = new ListagemCliente(cl.list());
+            }
+        });
         btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 acao = "update";
                 mostrarBotoes(false);
-                habilitarAtributos(false, true);
+                habilitarAtributos(false, true, true, true, true, true, true, true);
                 atvBotoes(false, true, false, false);
             }
         });
@@ -246,10 +279,10 @@ public class GeneroGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null,
-                        "Confirma a exclusão do registro <ID = " + genero.getIdGenero() + ">?", "Confirm",
+                        "Confirma a exclusão do registro <ID = " + cliente.getIdCliente() + ">?", "Confirm",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)) {
                     labelAviso.setText("Registro excluído...");
-                    daoGenero.remover(genero);
+                    cl.remover(cliente);
                     zerarAtributos();
                     textFieldId.requestFocus();
                     textFieldId.selectAll();
@@ -265,7 +298,6 @@ public class GeneroGUI extends JDialog {
                     labelAviso.setText("Digite uma Id e clic [Pesquisar]");
                 }
             }
-
             @Override
             public void focusLost(FocusEvent fe) {
                 textFieldId.setBackground(Color.white);
@@ -276,7 +308,6 @@ public class GeneroGUI extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldId.setBackground(Color.GREEN);
             }
-
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldId.setBackground(Color.white);
@@ -287,12 +318,78 @@ public class GeneroGUI extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldNome.setBackground(Color.GREEN);
             }
-
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldNome.setBackground(Color.white);
             }
         });
+        textFieldEndereco.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                textFieldEndereco.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                textFieldEndereco.setBackground(Color.white);
+            }
+        });
+        textFieldCpf.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                textFieldCpf.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                textFieldCpf.setBackground(Color.white);
+            }
+        });
+        textFieldTelefone.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                textFieldTelefone.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                textFieldTelefone.setBackground(Color.white);
+            }
+        });
+        textFieldCelular.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                textFieldCelular.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                textFieldCelular.setBackground(Color.white);
+            }
+        });
+        textFieldEmail.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                textFieldEmail.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                textFieldEmail.setBackground(Color.white);
+            }
+        });
+        textFieldSenha.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                textFieldSenha.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                textFieldSenha.setBackground(Color.white);
+            }
+        });
+        
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE); //antes de sair do sistema, grava os dados da lista em disco
         addWindowListener(new WindowAdapter() {
             @Override
@@ -302,11 +399,9 @@ public class GeneroGUI extends JDialog {
             }
         });
         setModal(true);
-
         setVisible(true);//faz a janela ficar visível  
     }
-
     public static void main(String[] args) {
-        new GeneroGUI();
+        new CRUDCliente();
     }
 }

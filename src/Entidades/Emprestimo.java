@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author alexa
  */
 @Entity
 @Table(name = "emprestimo")
@@ -38,13 +38,13 @@ public class Emprestimo implements Serializable {
     @Column(name = "id_emprestimo")
     private Integer idEmprestimo;
     @Basic(optional = false)
-    @Column(name = "data_retirada")
+    @Column(name = "data_emprestimo")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataRetirada;
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    private Date dataEmprestimo;
+    @JoinColumn(name = "cliente_id_cliente", referencedColumnName = "id_cliente")
     @ManyToOne(optional = false)
-    private Cliente idCliente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "emprestimo")
+    private Cliente clienteIdCliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "emprestimoIdEmprestimo")
     private List<ItensEmprestimo> itensEmprestimoList;
 
     public Emprestimo() {
@@ -54,9 +54,9 @@ public class Emprestimo implements Serializable {
         this.idEmprestimo = idEmprestimo;
     }
 
-    public Emprestimo(Integer idEmprestimo, Date dataRetirada) {
+    public Emprestimo(Integer idEmprestimo, Date dataEmprestimo) {
         this.idEmprestimo = idEmprestimo;
-        this.dataRetirada = dataRetirada;
+        this.dataEmprestimo = dataEmprestimo;
     }
 
     public Integer getIdEmprestimo() {
@@ -67,20 +67,20 @@ public class Emprestimo implements Serializable {
         this.idEmprestimo = idEmprestimo;
     }
 
-    public Date getDataRetirada() {
-        return dataRetirada;
+    public Date getDataEmprestimo() {
+        return dataEmprestimo;
     }
 
-    public void setDataRetirada(Date dataRetirada) {
-        this.dataRetirada = dataRetirada;
+    public void setDataEmprestimo(Date dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
     }
 
-    public Cliente getIdCliente() {
-        return idCliente;
+    public Cliente getClienteIdCliente() {
+        return clienteIdCliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
+    public void setClienteIdCliente(Cliente clienteIdCliente) {
+        this.clienteIdCliente = clienteIdCliente;
     }
 
     public List<ItensEmprestimo> getItensEmprestimoList() {

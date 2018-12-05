@@ -49,13 +49,4 @@ public class DAOEditora extends DAOGenerico<Editora> {
         }
         return ls;
     }
-
-    public static void main(String[] args) {
-        DAOEditora daoEditora = new DAOEditora();
-        List<Editora> listaEditora = daoEditora.list();
-        for (Editora nomeEditora : listaEditora) {
-            System.out.println(nomeEditora.getNomeEditora() + "-" + nomeEditora.getNomeEditora());
-        }
-    }
 }
-///////// ***LEMBRAR DE ALTERAR AQUI, SE PRECISAR*** /////////

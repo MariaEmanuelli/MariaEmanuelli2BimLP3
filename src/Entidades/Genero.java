@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Maria Emanuelli
+ * @author alexa
  */
 @Entity
 @Table(name = "genero")
@@ -32,6 +32,7 @@ public class Genero implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_genero")
     private Integer idGenero;
+    @Basic(optional = false)
     @Column(name = "nome_genero")
     private String nomeGenero;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoIdGenero")
@@ -42,6 +43,11 @@ public class Genero implements Serializable {
 
     public Genero(Integer idGenero) {
         this.idGenero = idGenero;
+    }
+
+    public Genero(Integer idGenero, String nomeGenero) {
+        this.idGenero = idGenero;
+        this.nomeGenero = nomeGenero;
     }
 
     public Integer getIdGenero() {

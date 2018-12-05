@@ -1,4 +1,0 @@
-idCliente;int;Estrangeira
-idLivro;int;Estrangeira
-dataRetirada;Date;dd/MM/yyy
-dataDevolucao;Date;dd/MM/yyy

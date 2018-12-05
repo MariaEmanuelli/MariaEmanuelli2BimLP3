@@ -1,2 +1,0 @@
-idAutor;int;a
-nomeAutor;String;a

@@ -49,13 +49,4 @@ public class DAOAutor extends DAOGenerico<Autor> {
         }
         return ls;
     }
-
-    public static void main(String[] args) {
-        DAOAutor daoAutor = new DAOAutor();
-        List<Autor> listaAutor = daoAutor.list();
-        for (Autor nomeAutor : listaAutor) {
-            System.out.println(nomeAutor.getNomeAutor() + "-" + nomeAutor.getNomeAutor());
-        }
-    }
 }
-///////// ***LEMBRAR DE ALTERAR AQUI, SE PRECISAR*** /////////
