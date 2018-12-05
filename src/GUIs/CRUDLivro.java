@@ -39,7 +39,6 @@ import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
 import myUtil.JanelaPesquisar;
 
-
 public class CRUDLivro extends JDialog {
 
     ImageIcon iconeCreate = new ImageIcon(getClass().getResource("/icones/create.png"));
@@ -325,7 +324,7 @@ public class CRUDLivro extends JDialog {
                     } catch (ParseException ex) {
                         Logger.getLogger(CRUDLivro.class.getName()).log(Level.SEVERE, null, ex);
                     }
-;
+                    ;
                     livro.setQuantidadeEstoqueLivro(Integer.valueOf(textFieldQuantidade.getText()));
 
                     String[] auxG = textFieldGenero.getText().split("-");
@@ -360,7 +359,7 @@ public class CRUDLivro extends JDialog {
                     } catch (ParseException ex) {
                         Logger.getLogger(CRUDLivro.class.getName()).log(Level.SEVERE, null, ex);
                     }
-;
+                    ;
                     livro.setQuantidadeEstoqueLivro(Integer.valueOf(textFieldQuantidade.getText()));
 
                     String[] auxG = textFieldGenero.getText().split("-");
@@ -378,7 +377,7 @@ public class CRUDLivro extends JDialog {
                     String[] auxS = textFieldStatus.getText().split("-");
                     Status status = new DAOStatus().obter(Integer.valueOf(auxS[0]));
                     livro.setStatusIdStatus(status);
-                    
+
                     cl.atualizar(livro);
                     mostrarBotoes(true);
                     habilitarAtributos(true, false, false, false, false, false, false, false, false);

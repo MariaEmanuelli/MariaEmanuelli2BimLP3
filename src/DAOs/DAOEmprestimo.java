@@ -1,7 +1,6 @@
 package DAOs;
 
 import Entidades.Emprestimo;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DAOEmprestimo extends DAOGenerico<Emprestimo> {
@@ -30,7 +29,6 @@ public class DAOEmprestimo extends DAOGenerico<Emprestimo> {
 //    public List<Emprestimo> listInOrderNome() {
 //        return em.createQuery("SELECT e FROM Emprestimo e ORDER BY e.nomeEmprestimo").getResultList();
 //    }
-
     public List<Emprestimo> listInOrderId() {
         return em.createQuery("SELECT e FROM Emprestimo e ORDER BY e.idEmprestimo").getResultList();
     }

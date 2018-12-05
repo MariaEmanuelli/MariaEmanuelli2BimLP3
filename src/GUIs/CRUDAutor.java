@@ -56,7 +56,7 @@ public class CRUDAutor extends JDialog {
     DAOAutor cl = new DAOAutor();
     Autor editora;
     Autor editoraOriginal;
-    
+
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     private void atvBotoes(boolean c, boolean r, boolean u, boolean d) {
@@ -265,6 +265,7 @@ public class CRUDAutor extends JDialog {
                     labelAviso.setText("Digite uma Id e clic [Pesquisar]");
                 }
             }
+
             @Override
             public void focusLost(FocusEvent fe) {
                 textFieldId.setBackground(Color.white);
@@ -275,6 +276,7 @@ public class CRUDAutor extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldId.setBackground(Color.GREEN);
             }
+
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldId.setBackground(Color.white);
@@ -285,6 +287,7 @@ public class CRUDAutor extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldNome.setBackground(Color.GREEN);
             }
+
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldNome.setBackground(Color.white);
@@ -295,6 +298,7 @@ public class CRUDAutor extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldDataNascimento.setBackground(Color.GREEN);
             }
+
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldDataNascimento.setBackground(Color.white);
@@ -311,6 +315,7 @@ public class CRUDAutor extends JDialog {
         setModal(true);
         setVisible(true);//faz a janela ficar visível  
     }
+
     public static void main(String[] args) {
         new CRUDAutor();
     }

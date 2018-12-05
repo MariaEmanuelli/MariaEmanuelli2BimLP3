@@ -253,6 +253,7 @@ public class CRUDEditora extends JDialog {
                     labelAviso.setText("Digite uma Id e clic [Pesquisar]");
                 }
             }
+
             @Override
             public void focusLost(FocusEvent fe) {
                 textFieldId.setBackground(Color.white);
@@ -263,6 +264,7 @@ public class CRUDEditora extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldId.setBackground(Color.GREEN);
             }
+
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldId.setBackground(Color.white);
@@ -273,6 +275,7 @@ public class CRUDEditora extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldNome.setBackground(Color.GREEN);
             }
+
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldNome.setBackground(Color.white);
@@ -283,6 +286,7 @@ public class CRUDEditora extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldCnpj.setBackground(Color.GREEN);
             }
+
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldCnpj.setBackground(Color.white);
@@ -299,6 +303,7 @@ public class CRUDEditora extends JDialog {
         setModal(true);
         setVisible(true);//faz a janela ficar visível  
     }
+
     public static void main(String[] args) {
         new CRUDEditora();
     }

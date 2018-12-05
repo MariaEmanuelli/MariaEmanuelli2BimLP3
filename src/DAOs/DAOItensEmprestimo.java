@@ -1,7 +1,6 @@
 package DAOs;
 
 import Entidades.ItensEmprestimo;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DAOItensEmprestimo extends DAOGenerico<ItensEmprestimo> {
@@ -22,7 +21,6 @@ public class DAOItensEmprestimo extends DAOGenerico<ItensEmprestimo> {
 //    public List<ItensEmprestimo> listByNome(String nome) {
 //        return em.createQuery("SELECT e FROM ItensEmprestimo e WHERE e.nomeItensEmprestimo LIKE :nome").setParameter("nome", "%" + nome + "%").getResultList();
 //    }
-
     public List<ItensEmprestimo> listById(int id) {
         return em.createQuery("SELECT e FROM ItensEmprestimo e WHERE e.idItensEmprestimo = :id").setParameter("id", id).getResultList();
     }
@@ -30,7 +28,6 @@ public class DAOItensEmprestimo extends DAOGenerico<ItensEmprestimo> {
 //    public List<ItensEmprestimo> listInOrderNome() {
 //        return em.createQuery("SELECT e FROM ItensEmprestimo e ORDER BY e.nomeItensEmprestimo").getResultList();
 //    }
-
     public List<ItensEmprestimo> listInOrderId() {
         return em.createQuery("SELECT e FROM ItensEmprestimo e ORDER BY e.idItensEmprestimo").getResultList();
     }

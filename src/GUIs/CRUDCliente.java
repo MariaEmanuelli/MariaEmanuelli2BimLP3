@@ -2,15 +2,12 @@ package GUIs;
 
 import DAOs.DAOCliente;
 import Entidades.Cliente;
-import static com.sun.glass.ui.Cursor.setVisible;
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
@@ -107,6 +104,7 @@ public class CRUDCliente extends JDialog {
         textFieldCpf.setText("");
         textFieldTelefone.setText("");
         textFieldCelular.setText("");
+        textFieldEmail.setText("");
         textFieldSenha.setText("");
 
     }
@@ -298,6 +296,7 @@ public class CRUDCliente extends JDialog {
                     labelAviso.setText("Digite uma Id e clic [Pesquisar]");
                 }
             }
+
             @Override
             public void focusLost(FocusEvent fe) {
                 textFieldId.setBackground(Color.white);
@@ -308,6 +307,7 @@ public class CRUDCliente extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldId.setBackground(Color.GREEN);
             }
+
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldId.setBackground(Color.white);
@@ -318,6 +318,7 @@ public class CRUDCliente extends JDialog {
             public void focusGained(FocusEvent fe) {
                 textFieldNome.setBackground(Color.GREEN);
             }
+
             @Override
             public void focusLost(FocusEvent fe) { //ao perder o foco, fica branco
                 textFieldNome.setBackground(Color.white);
@@ -389,7 +390,7 @@ public class CRUDCliente extends JDialog {
                 textFieldSenha.setBackground(Color.white);
             }
         });
-        
+
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE); //antes de sair do sistema, grava os dados da lista em disco
         addWindowListener(new WindowAdapter() {
             @Override
@@ -401,6 +402,7 @@ public class CRUDCliente extends JDialog {
         setModal(true);
         setVisible(true);//faz a janela ficar visível  
     }
+
     public static void main(String[] args) {
         new CRUDCliente();
     }

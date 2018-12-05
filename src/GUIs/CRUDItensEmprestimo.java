@@ -48,7 +48,7 @@ public class CRUDItensEmprestimo extends JDialog {
     JButton btnCancel = new JButton(iconeCancel);
     JButton btnList = new JButton(iconeListar);
     JLabel labelId = new JLabel("Id");
-JTextField textFieldId = new JTextField(0);
+    JTextField textFieldId = new JTextField(0);
     JLabel labelDataDevolucao = new JLabel("Data de devolução");
     JTextField textFieldDataDevolucao = new JTextField(40);
     JLabel labelLivro = new JLabel("Id do livro");
@@ -64,7 +64,7 @@ JTextField textFieldId = new JTextField(0);
     ItensEmprestimo emprestimoOriginal;
 
     DAOLivro daoLivro = new DAOLivro();
-    
+
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     private void atvBotoes(boolean c, boolean r, boolean u, boolean d) {
@@ -219,7 +219,7 @@ JTextField textFieldId = new JTextField(0);
                     } catch (ParseException ex) {
                         Logger.getLogger(CRUDItensEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                     String[] auxC = textFieldLivro.getText().split("-");
                     Livro livro = new DAOLivro().obter(Integer.valueOf(auxC[0]));
                     emprestimo.setLivroIdLivro(livro);
@@ -238,7 +238,7 @@ JTextField textFieldId = new JTextField(0);
                     } catch (ParseException ex) {
                         Logger.getLogger(CRUDItensEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                     String[] auxC = textFieldLivro.getText().split("-");
                     Livro livro = new DAOLivro().obter(Integer.valueOf(auxC[0]));
                     emprestimo.setLivroIdLivro(livro);

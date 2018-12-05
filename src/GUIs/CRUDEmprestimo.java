@@ -48,7 +48,7 @@ public class CRUDEmprestimo extends JDialog {
     JButton btnCancel = new JButton(iconeCancel);
     JButton btnList = new JButton(iconeListar);
     JLabel labelId = new JLabel("Id");
-JTextField textFieldId = new JTextField(0);
+    JTextField textFieldId = new JTextField(0);
     JLabel labelData = new JLabel("Data de retirada");
     JTextField textFieldData = new JTextField(40);
     JLabel labelCliente = new JLabel("Id oa cliente");
@@ -62,7 +62,7 @@ JTextField textFieldId = new JTextField(0);
     Emprestimo emprestimoOriginal;
 
     DAOCliente daoCliente = new DAOCliente();
-    
+
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     private void atvBotoes(boolean c, boolean r, boolean u, boolean d) {
@@ -215,7 +215,7 @@ JTextField textFieldId = new JTextField(0);
                     } catch (ParseException ex) {
                         Logger.getLogger(CRUDEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                     String[] auxC = textFieldCliente.getText().split("-");
                     Cliente cliente = new DAOCliente().obter(Integer.valueOf(auxC[0]));
                     emprestimo.setClienteIdCliente(cliente);
@@ -234,7 +234,7 @@ JTextField textFieldId = new JTextField(0);
                     } catch (ParseException ex) {
                         Logger.getLogger(CRUDEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                     String[] auxC = textFieldCliente.getText().split("-");
                     Cliente cliente = new DAOCliente().obter(Integer.valueOf(auxC[0]));
                     emprestimo.setClienteIdCliente(cliente);

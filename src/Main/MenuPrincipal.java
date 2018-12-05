@@ -42,13 +42,13 @@ public class MenuPrincipal extends JFrame {
     private JMenuItem crudGenero = new JMenuItem("Gênero");
     private JMenuItem crudEditora = new JMenuItem("Editora");
     private JMenuItem crudAutor = new JMenuItem("Autor");
-    
+
     private JMenuItem crudEmprestimo = new JMenuItem("Empréstimo");
     private JMenuItem crudLivro = new JMenuItem("Livro");
     private JMenuItem crudEndereco = new JMenuItem("Endereço");
-    
+
     private JMenuItem crudItensEmprestimo = new JMenuItem("Itens do Empréstimo");
-    
+
     public MenuPrincipal() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(800, 600);
@@ -77,7 +77,7 @@ public class MenuPrincipal extends JFrame {
         menuCadastros.add(crudLivro);
         menuCadastros.add(crudEndereco);
         menuCadastros.add(crudItensEmprestimo);
-        
+
         crudCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,21 +91,21 @@ public class MenuPrincipal extends JFrame {
                 CRUDStatus crudStatus1 = new CRUDStatus();
             }
         });
-        
+
         crudGenero.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CRUDGenero crudGenero1 = new CRUDGenero();
             }
         });
-        
+
         crudEditora.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CRUDEditora crudEditora = new CRUDEditora();
             }
         });
-        
+
         crudAutor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,21 +126,21 @@ public class MenuPrincipal extends JFrame {
                 CRUDLivro crudLivro1 = new CRUDLivro();
             }
         });
-        
+
         crudEndereco.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CRUDEndereco crudEndereco1 = new CRUDEndereco();
             }
         });
-        
+
         crudItensEmprestimo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CRUDItensEmprestimo crudItensEmprestimo1 = new CRUDItensEmprestimo();
             }
         });
-        
+
         setVisible(true);
     } //fecha o contrutor
 

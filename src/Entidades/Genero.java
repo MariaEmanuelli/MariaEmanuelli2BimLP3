@@ -98,5 +98,5 @@ public class Genero implements Serializable {
     public String toString() {
         return "Entidades.Genero[ idGenero=" + idGenero + " ]";
     }
-    
+
 }
