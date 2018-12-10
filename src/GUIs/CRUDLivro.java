@@ -287,7 +287,7 @@ public class CRUDLivro extends JDialog {
                         textFieldAutor.setText(a.getIdAutor() + "-" + a.getNomeAutor());
 
                         Status s = daoStatus.obter(livro.getStatusIdStatus().getIdStatus());
-                        textFieldStatus.setText(s.getIdStatus + "-" + s.getNomeStatus());
+                        textFieldStatus.setText(s.getIdStatus() + "-" + s.getNomeStatus());
 
                         atvBotoes(false, true, true, true);
                         habilitarAtributos(true, false, false, false, false, false, false, false, false);

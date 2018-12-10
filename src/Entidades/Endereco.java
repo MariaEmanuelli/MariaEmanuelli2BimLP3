@@ -122,5 +122,5 @@ public class Endereco implements Serializable {
     public String toString() {
         return "Entidades.Endereco[ idEndereco=" + idEndereco + " ]";
     }
-
+    
 }

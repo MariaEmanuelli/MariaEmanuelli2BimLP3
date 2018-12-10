@@ -3,6 +3,7 @@ package GUIs;
 import DAOs.DAOEmprestimo;
 import DAOs.DAOLivro;
 import DAOs.DAOItensEmprestimo;
+import Entidades.Emprestimo;
 import Entidades.Livro;
 import Entidades.ItensEmprestimo;
 import java.awt.BorderLayout;
@@ -61,8 +62,8 @@ public class CRUDItensEmprestimo extends JDialog {
     JLabel labelAviso = new JLabel("");
     String acao = "";//variavel para facilitar insert e update
     DAOItensEmprestimo cl = new DAOItensEmprestimo();
-    ItensEmprestimo emprestimo;
-    ItensEmprestimo emprestimoOriginal;
+    ItensEmprestimo itensEmprestimo;
+    ItensEmprestimo itensEmprestimoOriginal;
 
     DAOEmprestimo daoEmprestimo = new DAOEmprestimo();
     DAOLivro daoLivro = new DAOLivro();
@@ -191,26 +192,29 @@ public class CRUDItensEmprestimo extends JDialog {
         btnRetrieve.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                emprestimo = new ItensEmprestimo();
+                itensEmprestimo = new ItensEmprestimo();
                 textFieldId.setText(textFieldId.getText().trim());//caso tenham sido digitados espaços
                 if (textFieldId.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Deve ser informado um valor para esse campo");
                     textFieldId.requestFocus();
                     textFieldId.selectAll();
                 } else {
-                    emprestimo.setIdItensEmprestimo(Integer.parseInt(textFieldId.getText()));
-                    emprestimo = cl.obter(Integer.valueOf(textFieldId.getText()));
-                    if (emprestimo != null) { //se encontrou na lista
-                        textFieldDataDevolucao.setText(sdf.format(emprestimo.getDataDevolucaoItensEmprestimo()));
+                    itensEmprestimo.setIdItensEmprestimo(Integer.parseInt(textFieldId.getText()));
+                    itensEmprestimo = cl.obter(Integer.valueOf(textFieldId.getText()));
+                    if (itensEmprestimo != null) { //se encontrou na lista
+                        textFieldDataDevolucao.setText(sdf.format(itensEmprestimo.getDataDevolucaoItensEmprestimo()));
 
-                        Livro tu = daoLivro.obter(emprestimo.getLivroIdLivro().getIdLivro());
-                        textFieldLivro.setText(tu.getIdLivro() + "-" + tu.getNomeLivro());
-
+                        Livro l = daoLivro.obter(itensEmprestimo.getLivroIdLivro().getIdLivro());
+                        textFieldLivro.setText(l.getIdLivro() + "-" + l.getNomeLivro());
+                        
+                        Emprestimo e = daoEmprestimo.obter(itensEmprestimo.getEmprestimoIdEmprestimo().getIdEmprestimo());
+                        textFieldEmprestimo.setText(e.getIdEmprestimo() + "-" + e.getClienteIdCliente());
+                        
                         atvBotoes(false, true, true, true);
                         habilitarAtributos(true, false, false, false);
                         labelAviso.setText("Encontrou - clic [Pesquisar], [Alterar] ou [Excluir]");
                         acao = "encontrou";
-                        emprestimoOriginal = emprestimo;
+                        itensEmprestimoOriginal = itensEmprestimo;
                     } else {
                         atvBotoes(true, true, false, false);
                         labelAviso.setText("Não cadastrado - clic [Inserir] ou digite outra id [Pesquisar]");
@@ -232,37 +236,45 @@ public class CRUDItensEmprestimo extends JDialog {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (acao.equals("insert")) {
-                    emprestimo = new ItensEmprestimo();
-                    emprestimo.setIdItensEmprestimo(Integer.valueOf(textFieldId.getText()));
+                    itensEmprestimo = new ItensEmprestimo();
+                    itensEmprestimo.setIdItensEmprestimo(Integer.valueOf(textFieldId.getText()));
                     try {
-                        emprestimo.setDataDevolucaoItensEmprestimo(sdf.parse(textFieldDataDevolucao.getText()));
+                        itensEmprestimo.setDataDevolucaoItensEmprestimo(sdf.parse(textFieldDataDevolucao.getText()));
                     } catch (ParseException ex) {
                         Logger.getLogger(CRUDItensEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                    String[] auxC = textFieldLivro.getText().split("-");
-                    Livro livro = new DAOLivro().obter(Integer.valueOf(auxC[0]));
-                    emprestimo.setLivroIdLivro(livro);
-
-                    cl.inserir(emprestimo);
+                    String[] auxL = textFieldLivro.getText().split("-");
+                    Livro livro = new DAOLivro().obter(Integer.valueOf(auxL[0]));
+                    itensEmprestimo.setLivroIdLivro(livro);
+                    
+                    String[] auxE = textFieldEmprestimo.getText().split("-");
+                    Emprestimo emprestimo = new DAOEmprestimo().obter(Integer.valueOf(auxE[0]));
+                    itensEmprestimo.setEmprestimoIdEmprestimo(emprestimo);
+                    
+                    cl.inserir(itensEmprestimo);
                     habilitarAtributos(true, false, false, false);
                     zerarAtributos();
                     mostrarBotoes(true);
                     atvBotoes(false, true, false, false);
                     labelAviso.setText("Registro inserido...");
                 } else {  //acao = update
-                    emprestimo = new ItensEmprestimo();
-                    emprestimo.setIdItensEmprestimo(Integer.valueOf(textFieldId.getText()));
+                    itensEmprestimo = new ItensEmprestimo();
+                    itensEmprestimo.setIdItensEmprestimo(Integer.valueOf(textFieldId.getText()));
                     try {
-                        emprestimo.setDataDevolucaoItensEmprestimo(sdf.parse(textFieldDataDevolucao.getText()));
+                        itensEmprestimo.setDataDevolucaoItensEmprestimo(sdf.parse(textFieldDataDevolucao.getText()));
                     } catch (ParseException ex) {
                         Logger.getLogger(CRUDItensEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                    String[] auxC = textFieldLivro.getText().split("-");
-                    Livro livro = new DAOLivro().obter(Integer.valueOf(auxC[0]));
-                    emprestimo.setLivroIdLivro(livro);
-                    cl.atualizar(emprestimo);
+                    String[] auxL = textFieldLivro.getText().split("-");
+                    Livro livro = new DAOLivro().obter(Integer.valueOf(auxL[0]));
+                    
+                    String[] auxE = textFieldEmprestimo.getText().split("-");
+                    Emprestimo emprestimo = new DAOEmprestimo().obter(Integer.valueOf(auxE[0]));
+                    
+                    itensEmprestimo.setLivroIdLivro(livro);
+                    cl.atualizar(itensEmprestimo);
                     mostrarBotoes(true);
                     habilitarAtributos(true, false, false, false);
                     atvBotoes(false, true, false, false);
@@ -301,10 +313,10 @@ public class CRUDItensEmprestimo extends JDialog {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null,
-                        "Confirma a exclusão do registro <ID = " + emprestimo.getIdItensEmprestimo() + ">?", "Confirm",
+                        "Confirma a exclusão do registro <ID = " + itensEmprestimo.getIdItensEmprestimo() + ">?", "Confirm",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)) {
                     labelAviso.setText("Registro excluído...");
-                    cl.remover(emprestimo);
+                    cl.remover(itensEmprestimo);
                     zerarAtributos();
                     textFieldId.requestFocus();
                     textFieldId.selectAll();

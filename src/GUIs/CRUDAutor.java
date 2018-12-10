@@ -45,10 +45,11 @@ public class CRUDAutor extends JDialog {
 
     JLabel labelId = new JLabel("Id");
     JTextField textFieldId = new JTextField(0);
-    JLabel labelNome = new JLabel("Nome");
-    JTextField textFieldNome = new JTextField(0);
     JLabel labelDataNascimento = new JLabel("Data de Nascimento (dd/MM/yyyy)");
     JTextField textFieldDataNascimento = new JTextField(0);
+    JLabel labelNome = new JLabel("Nome");
+    JTextField textFieldNome = new JTextField(0);
+    
 
     JPanel aviso = new JPanel();
     JLabel labelAviso = new JLabel("");

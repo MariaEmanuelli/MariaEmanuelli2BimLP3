@@ -114,5 +114,5 @@ public class Autor implements Serializable {
     public String toString() {
         return "Entidades.Autor[ idAutor=" + idAutor + " ]";
     }
-
+    
 }

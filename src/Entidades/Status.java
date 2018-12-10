@@ -37,7 +37,6 @@ public class Status implements Serializable {
     private String nomeStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusIdStatus")
     private List<Livro> livroList;
-    public String getIdStatus;
 
     public Status() {
     }
@@ -99,5 +98,5 @@ public class Status implements Serializable {
     public String toString() {
         return "Entidades.Status[ idStatus=" + idStatus + " ]";
     }
-
+    
 }

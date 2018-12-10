@@ -42,7 +42,7 @@ public class DAOEmprestimo extends DAOGenerico<Emprestimo> {
             lf = listInOrderNome();
         }
 
-        List<String> ls = new ArrayList<String>();
+        List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
             ls.add(lf.get(i).getIdEmprestimo() + "-" + lf.get(i).getItensEmprestimoList());
         }

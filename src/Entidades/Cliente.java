@@ -170,5 +170,5 @@ public class Cliente implements Serializable {
     public String toString() {
         return "Entidades.Cliente[ idCliente=" + idCliente + " ]";
     }
-
+    
 }

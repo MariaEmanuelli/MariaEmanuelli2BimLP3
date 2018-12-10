@@ -120,5 +120,5 @@ public class Editora implements Serializable {
     public String toString() {
         return "Entidades.Editora[ idEditora=" + idEditora + " ]";
     }
-
+    
 }
