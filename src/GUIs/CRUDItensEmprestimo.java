@@ -269,9 +269,11 @@ public class CRUDItensEmprestimo extends JDialog {
 
                     String[] auxL = textFieldLivro.getText().split("-");
                     Livro livro = new DAOLivro().obter(Integer.valueOf(auxL[0]));
+                    itensEmprestimo.setLivroIdLivro(livro);
                     
                     String[] auxE = textFieldEmprestimo.getText().split("-");
                     Emprestimo emprestimo = new DAOEmprestimo().obter(Integer.valueOf(auxE[0]));
+                    itensEmprestimo.setEmprestimoIdEmprestimo(emprestimo);
                     
                     itensEmprestimo.setLivroIdLivro(livro);
                     cl.atualizar(itensEmprestimo);
