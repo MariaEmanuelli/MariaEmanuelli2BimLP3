@@ -208,7 +208,7 @@ public class CRUDItensEmprestimo extends JDialog {
                         textFieldLivro.setText(l.getIdLivro() + "-" + l.getNomeLivro());
                         
                         Emprestimo e = daoEmprestimo.obter(itensEmprestimo.getEmprestimoIdEmprestimo().getIdEmprestimo());
-                        textFieldEmprestimo.setText(e.getIdEmprestimo() + "-" + e.getClienteIdCliente());
+                        textFieldEmprestimo.setText(e.getIdEmprestimo() + "-" + " empréstimo de "+ e.getClienteIdCliente().getNomeCliente());
                         
                         atvBotoes(false, true, true, true);
                         habilitarAtributos(true, false, false, false);

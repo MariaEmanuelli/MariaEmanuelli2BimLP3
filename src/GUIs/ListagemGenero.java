@@ -19,7 +19,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
- * @author alexa
+ * @author maria
  */
 public class ListagemGenero extends JDialog {
 

@@ -44,8 +44,22 @@ public class DAOEmprestimo extends DAOGenerico<Emprestimo> {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getIdEmprestimo() + "-" + lf.get(i).getItensEmprestimoList());
+            ls.add(lf.get(i).getIdEmprestimo() + "-" + " emprésimo de " + lf.get(i).getClienteIdCliente().getNomeCliente());
         }
         return ls;
     }
+//    public List<String> listInOrderNomeStrings(String qualOrdem) {
+//        List<Emprestimo> lf;
+//        if (qualOrdem.equals("id")) {
+//            lf = listInOrderId();
+//        } else {
+//            lf = listInOrderNome();
+//        }
+//
+//        List<String> ls = new ArrayList<>();
+//        for (int i = 0; i < lf.size(); i++) {
+//            ls.add(lf.get(i).getIdEmprestimo() + "-" + lf.get(i).getItensEmprestimoList());
+//        }
+//        return ls;
+//    }
 }

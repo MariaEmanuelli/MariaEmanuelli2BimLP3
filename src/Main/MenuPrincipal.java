@@ -13,9 +13,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -60,8 +62,20 @@ public class MenuPrincipal extends JFrame {
         pnNorte.add(lbTitulo);
         lbTitulo.setFont(fonte);
         pnNorte.setBackground(Color.LIGHT_GRAY);
+        
+        try {
+            ImageIcon icone = new ImageIcon(getClass().getResource("/logo.png"));
+            Image imagemAux;
+            imagemAux = icone.getImage();
+            icone.setImage(imagemAux.getScaledInstance(674, 208, Image.SCALE_FAST));
+            
+            labelComImagemDeTamanhoDiferente = new JLabel();
+            labelComImagemDeTamanhoDiferente.setIcon(icone);
+        } catch (Exception e) {
+            System.out.println("erro ao carregar a imagem");
+        }
+        
         pnCentro.add(labelComImagemDeTamanhoDiferente);
-        pnCentro.setBackground(Color.BLACK);
 
         cp.add(pnNorte, BorderLayout.NORTH);
         cp.add(pnCentro, BorderLayout.CENTER);
